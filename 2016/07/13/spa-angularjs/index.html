@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+      
+    
+    
+      
+    
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript,angularjs," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="筑室因藏善本书" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Single Page Application - AngularJS最近半年做了不少单页面网站的开发，有静态也有动态的，主要基于 AngularJS（偶尔在我的 blog 中用了 ractive）。对这种重前端应用就着迷了，优点是前后端分工明确，高效（异步请求数据）且用户体验较好（没有频繁的页面跳转）。 没有任何框架能够适应一切场景。SPA 也有缺点，比如应用复杂代码量增加时，单页面应用就会有内">
+<meta name="keywords" content="javascript,angularjs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Single Page Application - AngularJS">
+<meta property="og:url" content="http://muxfe.github.io/2016/07/13/spa-angularjs/index.html">
+<meta property="og:site_name" content="筑室因藏善本书">
+<meta property="og:description" content="Single Page Application - AngularJS最近半年做了不少单页面网站的开发，有静态也有动态的，主要基于 AngularJS（偶尔在我的 blog 中用了 ractive）。对这种重前端应用就着迷了，优点是前后端分工明确，高效（异步请求数据）且用户体验较好（没有频繁的页面跳转）。 没有任何框架能够适应一切场景。SPA 也有缺点，比如应用复杂代码量增加时，单页面应用就会有内">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-27T12:20:21.761Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Single Page Application - AngularJS">
+<meta name="twitter:description" content="Single Page Application - AngularJS最近半年做了不少单页面网站的开发，有静态也有动态的，主要基于 AngularJS（偶尔在我的 blog 中用了 ractive）。对这种重前端应用就着迷了，优点是前后端分工明确，高效（异步请求数据）且用户体验较好（没有频繁的页面跳转）。 没有任何框架能够适应一切场景。SPA 也有缺点，比如应用复杂代码量增加时，单页面应用就会有内">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://muxfe.github.io/2016/07/13/spa-angularjs/"/>
+
+
+
+
+
+  <title>Single Page Application - AngularJS | 筑室因藏善本书</title>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=63365746";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">筑室因藏善本书</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">随笔杂记</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://muxfe.github.io/2016/07/13/spa-angularjs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="萧暮Kyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="筑室因藏善本书">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Single Page Application - AngularJS</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-13T16:03:20+08:00">
+                2016-07-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">前端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Single-Page-Application-AngularJS"><a href="#Single-Page-Application-AngularJS" class="headerlink" title="Single Page Application - AngularJS"></a>Single Page Application - AngularJS</h1><p>最近半年做了不少单页面网站的开发，有静态也有动态的，主要基于 AngularJS（偶尔在我的 <a href="https://github.com/x-web/x-web.github.io" target="_blank" rel="noopener">blog</a> 中<br>用了 <a href="http://www.ractivejs.org/" target="_blank" rel="noopener">ractive</a>）。对这种重前端应用就着迷了，优点是前后端分工明确，高效（异步请求数据）且用户体验较好（没有频繁的页面跳转）。</p>
+<p>没有任何框架能够适应一切场景。SPA 也有缺点，比如应用复杂代码量增加时，单页面应用就会有内存泄露等棘手问题，还有 SEO 优化等等问题。<br>SPA 适应的场景，如小型静态应用，与后台频繁交互（但不涉及重大安全问题）的应用等，我认为都是适合单页面应用的。</p>
+<p>SPA 与 RESTful API 非常合适，只要确定接口规范，前后端开发就能较为独立地进行，前端通过 mock 异步数据，后端则直接测试接口，在前期不用集成前后端一起调试。</p>
+<p>在此总结一下自己在基于 AngualrJS 搭建 SPA 应用的过程中学到的东西。仅限于 AngularJS 1.x。</p>
+<a id="more"></a>
+<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">./</span><br><span class="line">├─ src/</span><br><span class="line">│   ├─ app/</span><br><span class="line">│   │   ├─ [controller]/[.html, .controller.js, .css]</span><br><span class="line">│   │   ├─ app.js</span><br><span class="line">│   │   └─ app.controller.js</span><br><span class="line">│   ├─ component/[controller]/[.html, .controller.js*, .css*]</span><br><span class="line">│   ├─ fonts</span><br><span class="line">│   ├─ index.html</span><br><span class="line">│   ├─ 404.html</span><br><span class="line">│   ├─ favicon.ico</span><br><span class="line">│   └─ assets/[images, styles]</span><br><span class="line">├─ dist/</span><br><span class="line">├─ test/</span><br><span class="line">├─ Gruntfile.js</span><br><span class="line">├─ package.json</span><br><span class="line">└─ README.md</span><br></pre></td></tr></table></figure>
+<h2 id="应用框架"><a href="#应用框架" class="headerlink" title="应用框架"></a>应用框架</h2><h3 id="入口-index-html"><a href="#入口-index-html" class="headerlink" title="入口 - index.html"></a>入口 - index.html</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">ng-app</span>=<span class="string">"simpleApp"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- disable caches for all browser --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"cache-control"</span> <span class="attr">content</span>=<span class="string">"max-age=0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"cache-control"</span> <span class="attr">content</span>=<span class="string">"no-cache"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"cache-control"</span> <span class="attr">content</span>=<span class="string">"no-store"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"expires"</span> <span class="attr">content</span>=<span class="string">"0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"expires"</span> <span class="attr">content</span>=<span class="string">"Tue, 01 Jan 1980 1:00:00 GMT"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"pragma"</span> <span class="attr">content</span>=<span class="string">"no-cache"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- stylesheets start --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- stylesheets end --&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span> <span class="attr">ng-controller</span>=<span class="string">"MainCtrl"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-view</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- scripts start --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- scripts end --&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="初始化-app-app-js"><a href="#初始化-app-app-js" class="headerlink" title="初始化 - app/app.js"></a>初始化 - app/app.js</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> app = angular</span><br><span class="line">    .module(<span class="string">'simpleApp'</span>, [<span class="string">'ngRoute'</span>])</span><br><span class="line">    .filter(<span class="string">'breakFilter'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">text</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!!text) &#123;</span><br><span class="line">          <span class="keyword">return</span> text.replace(<span class="regexp">/\n/g</span>, <span class="string">'&lt;br /&gt;'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;)</span><br><span class="line">    .config(<span class="function"><span class="keyword">function</span>(<span class="params">$routeProvider, $compileProvider</span>) </span>&#123;</span><br><span class="line">      $routeProvider</span><br><span class="line">        .when(<span class="string">'home'</span>, &#123;</span><br><span class="line">          templateUrl: <span class="string">'app/home/home.html'</span>,</span><br><span class="line">        &#125;)</span><br><span class="line">        .when(<span class="string">'somepage/somepath/:someparam?'</span>, &#123;</span><br><span class="line">          templateUrl: <span class="string">'app/somepage/somepage.html'</span>,</span><br><span class="line">        &#125;)</span><br><span class="line">        .otherwise(&#123;</span><br><span class="line">          redirectTo: <span class="string">'/home'</span>,</span><br><span class="line">        &#125;);</span><br><span class="line">      <span class="comment">// 数据绑定写入 a.href 时的白名单过滤</span></span><br><span class="line">      $compileProvider.aHrefSanitizationWhitelist(<span class="regexp">/^(http|https|file|tel):/</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<p>上面在初始化应用时添加了依赖 ngRoute ，这不是 AngularJS 原生自带的，需要单独引入 angular-route.js 文件，且必须保持与 angular.js 版本一致，否则会报错。</p>
+<h3 id="控制器-controller-js"><a href="#控制器-controller-js" class="headerlink" title="控制器 - *.controller.js"></a>控制器 - *.controller.js</h3><p>以 MainCtrl 为例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line">angular.module(<span class="string">'simpleApp'</span>).controller(<span class="string">'MainCtrl'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope, $http</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// do something</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="ng-repeat"><a href="#ng-repeat" class="headerlink" title="ng-repeat"></a>ng-repeat</h3><p>ng-repeat 是一个非常好用的命令，类似 forEach，能够遍历数组或对象属性，循环创建 DOM 元素。<br>一个简单的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.controller(<span class="string">'SomeCtrl'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>) </span>&#123;</span><br><span class="line">  $scope.items = [&#123; <span class="attr">name</span>: <span class="string">'xm'</span> &#125;, &#123; <span class="attr">name</span>: <span class="string">'kyer'</span> &#125;];</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">ng-repeat</span>=<span class="string">"item in items"</span>&gt;</span>&#123;&#123;item.name&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="ng-if-ng-show"><a href="#ng-if-ng-show" class="headerlink" title="ng-if/ng-show"></a>ng-if/ng-show</h3><p>这两个命令的用法看起来很像，都是根据属性值的真假来决定是否显示该 DOM 元素，但是有一点很重要的区别。<br><code>ng-if</code> 值为 false 时，不会创建该 DOM 元素，而 <code>ng-show</code> 值为 false 时，该元素依然会被创建，只是通过设置 css 属性 <code>display: none;</code> 使其不显示而已。</p>
+<h3 id="ng-src-ng-href"><a href="#ng-src-ng-href" class="headerlink" title="ng-src/ng-href"></a>ng-src/ng-href</h3><p>由于 AngularJS 的数据替换是在脚本加载完成以后进行的，所以如果写了类似</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"&#123;&#123;data.image&#125;&#125;"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>其中 img 标签的 src 值会在被替换前无法正确显示图片，因为根本不存在 <code>data.image</code> 路径的图片文件，这时候就需要 ng-src 命令了，它会在 AngularJS<br>替换完数据后为 img 标签添加 src 属性，这时候就是正确的值了。</p>
+<p>同理，ng-href 也是解决在数据替换前，a 标签的不正确行为。</p>
+<h2 id="一些问题的解决方法"><a href="#一些问题的解决方法" class="headerlink" title="一些问题的解决方法"></a>一些问题的解决方法</h2><h3 id="输出-html-标签"><a href="#输出-html-标签" class="headerlink" title="输出 html 标签"></a>输出 html 标签</h3><p>使用 <code>\{\{someHtmlStr\}\}</code>(注：双花括号与 hexo 模板解析冲突，故在此加<code>\</code>) 或 <code>ng-bind=&quot;someHtmlStr&quot;</code> 输出带有 html 标签的字符串时，<br>AngularJS 默认对其中的 html 标签做实体化转义，即将 <code>&lt;p&gt;Hi&lt;/p&gt;</code> 变成 <code>&amp;lt;p&amp;gt;Hi&amp;lt;/p&amp;gt;Hi</code>，然后浏览器上看到的就是<code>&lt;p&gt;Hi&lt;p&gt;</code>.</p>
+<p>AngualrJS 出于安全考虑对字符串做了过滤，但有时候我们希望输出没有实体化的 html 标签，这时候需要做一些工作。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> someHtmlStr = <span class="string">'&lt;p&gt;Hi&lt;/p&gt;'</span>;</span><br><span class="line">$scope.someHtmlStr = $sce.trustAsHtml(someHtmlStr);</span><br></pre></td></tr></table></figure>
+<p>$sce 服务中的 sce 是 ‘Stric Contextual Escaping’ 的缩写，即’严格的上下文模式’。</p>
+<p>除了上面的方式，还可以写成自定义的 filter。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">app.filter(<span class="string">'html2trusted'</span>, [<span class="string">'$sce'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">$sce</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">text</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> $sce.trustAsHtml(text);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">ng-bind-html</span>=<span class="string">"someHtmlStr | html2trusted"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="ng-repeat-渲染完成事件监听"><a href="#ng-repeat-渲染完成事件监听" class="headerlink" title="ng-repeat 渲染完成事件监听"></a>ng-repeat 渲染完成事件监听</h3><p>有时候在一些第三方库时，会要求所需的 DOMContent 已经渲染完成，但 ng-repeat 命令渲染 DOM 和后续 js 代码执行时并行的，<br>我们必须监听 ng-repeat 完成时的事件，然后再对相应的 DOM 初始化第三方库。</p>
+<p>一个比较容易理解的例子就是轮播组件，轮播内容用 ng-repeat 命令输出，但是初始化轮播时都要计算一些元素的 width/height 属性等，<br>由于代码是异步执行的，一旦进行了数据绑定，ng-repeat 渲染就会开始，而往往我们执行 <code>$(&quot;#slide&quot;).slide({})</code> 时渲染还未完成，<br>就会得到不正确的显示结果。所以，轮播初始化必须在 ng-repeat 渲染完成后执行。使用 AngularJS 自定义的属性标签可以实现监听 ngRepeatFinished 事件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">app</span><br><span class="line">  .controller(<span class="string">'SomeCtrl'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>) </span>&#123;</span><br><span class="line">    $scope.items = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"></span><br><span class="line">    $scope.$on(<span class="string">'ngRepeatFinished'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ngRepeatFinishedEvent</span>) </span>&#123;</span><br><span class="line">      <span class="comment">// do something</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)</span><br><span class="line">  .directive(<span class="string">'onFinishRender'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$timeout</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      restrict: <span class="string">'A'</span>,</span><br><span class="line">      link: <span class="function"><span class="keyword">function</span>(<span class="params">scope, element, attr</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (scope.$last === <span class="literal">true</span>) &#123;</span><br><span class="line">          <span class="comment">// $timeout 将触发事件的操作放到事件队列的最后，以保证已全部渲染完成</span></span><br><span class="line">          $timeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            scope.$emit(attr.onFinishRender);</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">ng-repeat</span>=<span class="string">"item in items"</span> <span class="attr">on-finish-render</span>=<span class="string">"ngRepeatFinished"</span>&gt;</span>&#123;&#123;item&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="lazy-loading"><a href="#lazy-loading" class="headerlink" title="lazy-loading"></a>lazy-loading</h3><p>在 ng-view 中渲染的 DOM 是不会解释其中包含的 script 标签的。这时候就需要用到写一个可以正常加载其中包含的 script 标签的指令。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">app.directive(<span class="string">'script'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    restrict: <span class="string">'E'</span>,</span><br><span class="line">    scope: <span class="literal">false</span>,</span><br><span class="line">    link: <span class="function"><span class="keyword">function</span>(<span class="params">scope, elem, attr</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (attr.type === <span class="string">'text/javascript-lazy'</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> s = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span><br><span class="line">        s.type = <span class="string">'text/javascript'</span>;</span><br><span class="line">        <span class="keyword">var</span> src = elem.attr(<span class="string">'src'</span>);</span><br><span class="line">        <span class="keyword">if</span> (src !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">          s.src = src;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">var</span> code = elem.text();</span><br><span class="line">          s.text = code;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">document</span>.body.appendChild(s);</span><br><span class="line">        elem.remove();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript-lazy"</span> <span class="attr">src</span>=<span class="string">"somefile.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这样即使在模板中写 script 标签引入外部文件，就可以正常执行了。再查了一下，发现除了 script 标签，view, controller 等都可以 lazy loading，而且这个概念也不仅局限于 AngularJS.</p>
+<h2 id="概念理解"><a href="#概念理解" class="headerlink" title="概念理解"></a>概念理解</h2><h3 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h3><p>AngularJS 使用依赖注入提高控制器代码的灵活性，通过参数名匹配注入相应的功能或服务。比如一直写的</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.controller(<span class="string">'SomeCtrl'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">$scope, $http, ...</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// some code</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>参数列表中的 $scope, $http 等都是 AngularJS 原生的（前面有 <code>$</code>），参数列表的顺序可以是任意的，也不用列出所有可用的参数，只需选择自己用到的即可。</p>
+<p>自己也可以定义服务、工厂函数等，AngularJS 的依赖注入机制提供了多种类型，包括</p>
+<ul>
+<li>值 - value</li>
+<li>工厂 - factory</li>
+<li>服务 - service</li>
+<li>提供者 - $provide</li>
+<li>常量 - constant</li>
+</ul>
+<p>目前还没用过这些类型，都是自己在控制器里写相应的代码。看过一点前端的 MVC，即使用自定义工厂映射 RESTful API 对应的资源，通过对这些对象的修改，会直接 ajax 请求更新到后台，非常方便，值得学习使用。</p>
+<h3 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h3><p>AngularJS 最让人惊喜莫过于数据双向绑定了，对于表单的验证与提交，动态数据渲染 DOM 方面不能更好用了。对它的实现没有深入了解过多，<br>应该是用到了脏数据检查，将数据与 DOM 元素属性绑定，一旦数据修改了就更新，而且这种更新是双向的，DOM 内容可以直接修改 js 对象，js 对象值的修改也会直接反映到 DOM 中。 这块还要深入学习。</p>
+<h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><p>不论是前后端模板，在生成 html 内容时都有作用域的概念，如 JSP 中，通过将 <code>&lt;% %&gt;</code> 标签外的 html 代码变成字符串，标签内容代码生成 Java 代码，从而使得 JSP 页面内拥有了对应 Servlet 变量的作用域。</p>
+<p>AngularJS 则通过 <code>$scope</code> 为页面模板绑定作用域，所有挂在 <code>$scope</code> 上的属性，可以直接在页面中使用。其中对于非 AngularJS 属性，如 <code>href</code>，<code>src</code>等要使用 AngularJS 模板需要使用花括号包起变量，而对于 AngularJS 的属性，则直接使用，如 <code>ng-if=&quot;someBoolean&quot;</code>.</p>
+<p>AngularJS 的作用域还可以嵌套，在父作用域中定义的属性，可以在子作用域中访问。</p>
+<h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><p>ng-view 属性用于在页面的 hashtag 发生变化时，将对应的模板渲染到该属性对应的 DOM 容器中。视图可以嵌套，不过我还没遇到过这样的开发场景。</p>
+<h3 id="directive"><a href="#directive" class="headerlink" title="directive"></a>directive</h3><p>这个可能是 AngularJS 最难学的部分了，属于高手进阶关卡。在开发中遇到问题时，总是能搜到各种各样的 directive 解决方案，然而并看不懂。</p>
+<p>首先 directive 非常强大，可以做出自定义的一套标签库，还包括自定义属性等等。而 directive 就提供了解析和处理这些自定义标签/属性等的操作。</p>
+<h2 id="我的相关项目"><a href="#我的相关项目" class="headerlink" title="我的相关项目"></a>我的相关项目</h2><ul>
+<li><a href="https://github.com/xdsselab/sselab.org" target="_blank" rel="noopener">sselab</a></li>
+<li><a href="http://rosenjx.com" target="_blank" rel="noopener">罗森光电科技</a></li>
+<li><a href="http://git.oschina.net/x-web/document-check-tool-web" target="_blank" rel="noopener">文档格式检查工具</a></li>
+<li><a href="http://git.oschina.net/x-web/pingpangke" target="_blank" rel="noopener">乒乓客</a></li>
+</ul>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="https://segmentfault.com/a/1190000000639561" target="_blank" rel="noopener">angular 中的 ng-bind-html 指令和$sce 服务</a></li>
+<li><a href="http://stackoverflow.com/questions/15207788/calling-a-function-when-ng-repeat-has-finished" target="_blank" rel="noopener">Calling a function when ng-repeat has finished</a></li>
+<li><a href="http://stackoverflow.com/questions/19917774/why-ng-scope-is-added-to-javascript-inline-of-my-partial-view-and-makes-alert-no/22476888#22476888" target="_blank" rel="noopener">Why ng-scope is added to javascript inline of my partial view and makes alert not working?</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wxpay.png" alt="萧暮Kyer WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="萧暮Kyer Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    萧暮Kyer
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://muxfe.github.io/2016/07/13/spa-angularjs/" title="Single Page Application - AngularJS">http://muxfe.github.io/2016/07/13/spa-angularjs/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+            <a href="/tags/angularjs/" rel="tag"># angularjs</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/01/2015-review/" rel="next" title="2015 年终总结">
+                <i class="fa fa-chevron-left"></i> 2015 年终总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/19/hexo-blog/" rel="prev" title="hexo + fexo 搭建 GitHub-Pages 静态博客">
+                hexo + fexo 搭建 GitHub-Pages 静态博客 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="萧暮Kyer" />
+          <p class="site-author-name" itemprop="name">萧暮Kyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/muxfe" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/b1ackdr3am" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                    
+                      Twitter
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/xw3b" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/muxfe/" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      豆瓣
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Single-Page-Application-AngularJS"><span class="nav-number">1.</span> <span class="nav-text">Single Page Application - AngularJS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#项目结构"><span class="nav-number">1.1.</span> <span class="nav-text">项目结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用框架"><span class="nav-number">1.2.</span> <span class="nav-text">应用框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#入口-index-html"><span class="nav-number">1.2.1.</span> <span class="nav-text">入口 - index.html</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化-app-app-js"><span class="nav-number">1.2.2.</span> <span class="nav-text">初始化 - app/app.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制器-controller-js"><span class="nav-number">1.2.3.</span> <span class="nav-text">控制器 - *.controller.js</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用命令"><span class="nav-number">1.3.</span> <span class="nav-text">常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ng-repeat"><span class="nav-number">1.3.1.</span> <span class="nav-text">ng-repeat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ng-if-ng-show"><span class="nav-number">1.3.2.</span> <span class="nav-text">ng-if/ng-show</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ng-src-ng-href"><span class="nav-number">1.3.3.</span> <span class="nav-text">ng-src/ng-href</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些问题的解决方法"><span class="nav-number">1.4.</span> <span class="nav-text">一些问题的解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#输出-html-标签"><span class="nav-number">1.4.1.</span> <span class="nav-text">输出 html 标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ng-repeat-渲染完成事件监听"><span class="nav-number">1.4.2.</span> <span class="nav-text">ng-repeat 渲染完成事件监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lazy-loading"><span class="nav-number">1.4.3.</span> <span class="nav-text">lazy-loading</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念理解"><span class="nav-number">1.5.</span> <span class="nav-text">概念理解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖注入"><span class="nav-number">1.5.1.</span> <span class="nav-text">依赖注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据绑定"><span class="nav-number">1.5.2.</span> <span class="nav-text">数据绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用域"><span class="nav-number">1.5.3.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图"><span class="nav-number">1.5.4.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#directive"><span class="nav-number">1.5.5.</span> <span class="nav-text">directive</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我的相关项目"><span class="nav-number">1.6.</span> <span class="nav-text">我的相关项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">1.7.</span> <span class="nav-text">参考链接</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-star"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">萧暮Kyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

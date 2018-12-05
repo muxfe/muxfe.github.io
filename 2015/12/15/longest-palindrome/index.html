@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+      
+    
+    
+      
+    
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="algorithm," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="筑室因藏善本书" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="最长回文子串最近在 leetcode 上刷算法题，重温一下 ACM 和 javascript 练手，发现了一道有趣的题目，最长回文子串。 开始的想法是反转字符串然后找出最大公共子串（LCS），但是 TLE 了。觉得可能是 js 本身效率太低，然后找了 leetcode 上别人写的算法分析，发现反转后找 LCS 是错误的，而且分析写得非常好，觉得应该好好学习下，记录在此。 回文回文字符串就是指无论从">
+<meta name="keywords" content="algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最长回文子串">
+<meta property="og:url" content="http://muxfe.github.io/2015/12/15/longest-palindrome/index.html">
+<meta property="og:site_name" content="筑室因藏善本书">
+<meta property="og:description" content="最长回文子串最近在 leetcode 上刷算法题，重温一下 ACM 和 javascript 练手，发现了一道有趣的题目，最长回文子串。 开始的想法是反转字符串然后找出最大公共子串（LCS），但是 TLE 了。觉得可能是 js 本身效率太低，然后找了 leetcode 上别人写的算法分析，发现反转后找 LCS 是错误的，而且分析写得非常好，觉得应该好好学习下，记录在此。 回文回文字符串就是指无论从">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-27T09:01:19.209Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="最长回文子串">
+<meta name="twitter:description" content="最长回文子串最近在 leetcode 上刷算法题，重温一下 ACM 和 javascript 练手，发现了一道有趣的题目，最长回文子串。 开始的想法是反转字符串然后找出最大公共子串（LCS），但是 TLE 了。觉得可能是 js 本身效率太低，然后找了 leetcode 上别人写的算法分析，发现反转后找 LCS 是错误的，而且分析写得非常好，觉得应该好好学习下，记录在此。 回文回文字符串就是指无论从">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://muxfe.github.io/2015/12/15/longest-palindrome/"/>
+
+
+
+
+
+  <title>最长回文子串 | 筑室因藏善本书</title>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=63365746";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">筑室因藏善本书</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">随笔杂记</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://muxfe.github.io/2015/12/15/longest-palindrome/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="萧暮Kyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="筑室因藏善本书">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">最长回文子串</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-15T12:03:20+08:00">
+                2015-12-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="最长回文子串"><a href="#最长回文子串" class="headerlink" title="最长回文子串"></a>最长回文子串</h2><p>最近在 leetcode 上刷算法题，重温一下 ACM 和 javascript 练手，发现了一道有趣的题目，最长回文子串。</p>
+<p>开始的想法是反转字符串然后找出最大公共子串（LCS），但是 TLE 了。觉得可能是 js 本身效率太低，然后找了 leetcode 上别人写的算法分析，发现反转后找 LCS 是错误的，而且分析写得非常好，觉得应该好好学习下，记录在此。</p>
+<h3 id="回文"><a href="#回文" class="headerlink" title="回文"></a>回文</h3><p>回文字符串就是指无论从那个方向读都是一样的，如<code>&#39;aba&#39;</code>就是一个简单的回文串。</p>
+<p>开始的想法是先将字符串反转，然后找出它们的最长公共子串，即是要找最长回文串。</p>
+<p><strong>然而这是错误的！！！</strong></p>
+<a id="more"></a>
+<p>比如 <code>&#39;abadfcdaba&#39;</code> 反转后是 <code>&#39;abadcfdaba&#39;</code>，它们的 LCS 是 <code>&#39;abad&#39;</code>，这显然不是一个回文串。</p>
+<p>而它存在的原因就是原字符串中出现了两个一样的回文串，且有额外相同的部分分别出现在这两个回文串的前后。导致反转后的字符串除了回文部分相同外，还有非回文串也相同。</p>
+<p>下面介绍几种不同的方法来计算 LPS。</p>
+<h3 id="暴力搜索"><a href="#暴力搜索" class="headerlink" title="暴力搜索"></a>暴力搜索</h3><p>最简单的办法是找出字符串中的所有子串，判断其是否为回文串，然后记录下其中最大的回文子串即可。</p>
+<p>暴搜无例外的话效率都很低，这个算法是 <code>O(N^3)</code> 的。首先找出所有子串 是 <code>O(N^2)</code> 的，然后判断其是否为回文是 <code>O(N)</code> 的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> longestPalindrome_bf = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!s) <span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">  <span class="keyword">var</span> longest = s[<span class="number">0</span>], str, i, j, len;</span><br><span class="line">  <span class="keyword">var</span> isPalindrom = <span class="function"><span class="keyword">function</span> (<span class="params">left, right</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (left &lt; right &amp;&amp; s[left] === s[right]) &#123;</span><br><span class="line">      left++;</span><br><span class="line">      right--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> left &gt;= right;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (len = <span class="number">2</span>; len &lt;= s.length; len++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; s.length; i++) &#123;</span><br><span class="line">      j = i + len - <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">if</span> (isPalindrom(i, j)) &#123;</span><br><span class="line">        str = s.slice(i, j + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (longest.length &lt; str.length) longest = str;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> longest;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>DP可能是解这个问题的一个好方法，然而算法复杂度依然是 O(N^2) 的，而且空间复杂度也是 O(N^2)。</p>
+<p>我们假设用 <code>P[i][j]</code> 来表示 <code>s[i..j]</code> 是否是一个回文子串。</p>
+<p>它的计算公式长这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">P[i][j] = s[i] === s[j] &amp;&amp; P[i + <span class="number">1</span>][j - <span class="number">1</span>] ? <span class="literal">true</span> : <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+<p>算法实现如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> longestPalindrome_dp = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> i, j, len;</span><br><span class="line">  <span class="comment">// isPalindrom[i][j] represent s[i..j] is a parlindrom string or not.</span></span><br><span class="line">  <span class="keyword">var</span> isPalindrom = <span class="keyword">new</span> <span class="built_in">Array</span>(s.length);</span><br><span class="line">  <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; s.length; i++) &#123;</span><br><span class="line">    isPalindrom[i] = <span class="keyword">new</span> <span class="built_in">Array</span>(s.length).fill(<span class="literal">false</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> maxLen = <span class="number">1</span>, longestBegin = <span class="number">0</span>;</span><br><span class="line">  <span class="comment">// initialize</span></span><br><span class="line">  <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; s.length; i++) &#123;</span><br><span class="line">    isPalindrom[i][i] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span> (i &lt; s.length - <span class="number">1</span> &amp;&amp; s[i] === s[i + <span class="number">1</span>]) &#123;</span><br><span class="line">      isPalindrom[i][i + <span class="number">1</span>] = <span class="literal">true</span>;</span><br><span class="line">      maxLen = <span class="number">2</span>;</span><br><span class="line">      longestBegin = i;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// compute</span></span><br><span class="line">  <span class="keyword">for</span> (len = <span class="number">3</span>; len &lt;= s.length; len++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; s.length; i++) &#123;</span><br><span class="line">      j = len + i - <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">if</span> (s[i] === s[j] &amp;&amp; isPalindrom[i + <span class="number">1</span>][j - <span class="number">1</span>]) &#123;</span><br><span class="line">        isPalindrom[i][j] = <span class="literal">true</span>;</span><br><span class="line">        maxLen = len;</span><br><span class="line">        longestBegin = i;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> s.slice(longestBegin, longestBegin + maxLen);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个实现在 leetcode 上 TLE 了。几乎跟暴搜一样慢。</p>
+<p>ps. 我觉得跟 js 的数组对象有关。在 js 中处理二维数组比静态语言处理要慢的多。</p>
+<h2 id="继续优化"><a href="#继续优化" class="headerlink" title="继续优化"></a>继续优化</h2><h3 id="降低空间复杂度"><a href="#降低空间复杂度" class="headerlink" title="降低空间复杂度"></a>降低空间复杂度</h3><p>DP 的空间复杂度是 <code>O(N^2)</code> 的，主要用来保存二维数组 <code>P[i][j]</code>，而且只用了一半。</p>
+<p>我们可以把空间复杂度降到 <code>O(1)</code>，只存找到的最长回文串即可。枚举轴心位置，并进行扩展。如果是回文，则轴心两边的字符应该对称相等。</p>
+<p>需要考虑到长度奇偶情况的不同，如果是奇数长度，轴心就是一个字符；如果是偶数长度，轴心则不在字符串中。</p>
+<p>实现如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> longestPalindrome_enum = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!s) <span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">  <span class="keyword">var</span> longest = s[<span class="number">0</span>];</span><br><span class="line">  <span class="keyword">var</span> expandAroundCenter = <span class="function"><span class="keyword">function</span> (<span class="params">left, right</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (left &gt;= <span class="number">0</span> &amp;&amp; right &lt; s.length &amp;&amp; s[left] === s[right]) &#123;</span><br><span class="line">      left--;</span><br><span class="line">      right++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s.slice(left + <span class="number">1</span>, right);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; s.length; i++) &#123;</span><br><span class="line">    <span class="comment">// 奇数</span></span><br><span class="line">    <span class="keyword">var</span> odd = expandAroundCenter(i, i);</span><br><span class="line">    <span class="keyword">if</span> (odd.length &gt; longest.length) longest = odd;</span><br><span class="line">    <span class="comment">// 偶数</span></span><br><span class="line">    <span class="keyword">var</span> even = expandAroundCenter(i, i + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (longest.length &lt; even.length) longest = even;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> longest;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个实现在 leetcode 上 AC 了，用了 <code>236ms</code>。</p>
+<h3 id="降低时间复杂度"><a href="#降低时间复杂度" class="headerlink" title="降低时间复杂度"></a>降低时间复杂度</h3><p>相比降低空间复杂度，降低时间复杂度要难得多。这里有一个 <code>O(N)</code> 时间复杂度的算法，叫做 <a href="https://en.wikipedia.org/wiki/Longest_palindromic_substring#Manacher.27s_algorithm" target="_blank" rel="noopener">Manacher</a> 算法。</p>
+<p>能够从 <code>O(N^2)</code> 降到 <code>O(N)</code>，这个算法很巧妙。它首先解决了长度奇偶不同的问题。</p>
+<p>通过向字符串中加入一些特殊字符来使长度均为<strong>奇数</strong>。特殊字符即为原字符串的字符集中没有的字符。如 <code>&#39;aba&#39;</code> 中插入 <code>&#39;#&#39;</code>，变成<code>&#39;#a#b#a#&#39;</code>。</p>
+<p>然后提出了一个<strong>回文半径</strong>（P）的概念：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">T = # a # b # a # a # b # a #</span><br><span class="line">P = 0 1 0 3 0 1 6 1 0 3 0 1 0</span><br></pre></td></tr></table></figure>
+<p>它代表了以该字符为轴心的回文串对折后的长度。由于插入了特殊字符，如果最长回文字符串的长度为偶数，则轴心会出现在 <code>&#39;#&#39;</code> 上。</p>
+<p>容易看出上面的例子中，最大回文子串的轴心就是 <code>P</code> 为 6 的字符。最大回文子串为 <code>&#39;abaaba&#39;</code> ，长度刚好为 6.</p>
+<p>这显然不是巧合，接下来就是要计算 <code>P</code>，记下其最大值及对应下标，即可。目标时间复杂度 <code>O(N)</code>。当然，这个算法最难的部分，就是计算 <code>P</code>。</p>
+<p>正常计算 <code>P</code> 的话，时间复杂度依然是 <code>O(N^2)</code>，但是如果利用回文串的对称特性，减少搜索，就可以将复杂度降至 <code>O(N)</code>。</p>
+<p>计算 <code>P</code> 就是以每一个字符为轴心计算回文半径，也就是从每一个字符开始向两边搜索，那么右边必然会搜索到尚未遍历到的字符，如果我们记下最大能搜索到的右边界 <code>R</code><br>。在后面的遍历搜索中，如果当前 <code>T[i]</code> 在边界内，即比最大右边界小，那么也就是在一个已搜索的回文子串中，假设 <code>i&#39;</code> 是 <code>i</code> 对应当前最大 <code>R</code> 的轴心 <code>C</code> 的对称位置（即 <code>T[i] == T[i&#39;]</code>）， 可以做出下面的结论：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if P[i&apos;] &lt; R-i</span><br><span class="line">then P[i] = P[i&apos;]</span><br><span class="line">else P[i] &gt;= P[i&apos;] （需要进一步扩展搜索得出）</span><br></pre></td></tr></table></figure>
+<p>另一种情况，如果当前字符 <code>T[i]</code> 不在边界内，即我们不能得出任何结论，所以 <code>P[i] = 0</code>。</p>
+<p>js 实现：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> longestPalindrome_manacher = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">  s = <span class="string">'^#'</span> + s.split(<span class="string">''</span>).join(<span class="string">'#'</span>) + <span class="string">'#$'</span>;</span><br><span class="line">  <span class="keyword">var</span> radius = <span class="keyword">new</span> <span class="built_in">Array</span>(s.length).fill(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">var</span> C = <span class="number">0</span>, centerIndex = <span class="number">0</span>, maxRight = <span class="number">0</span>, maxLen = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; s.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">    <span class="comment">// 计算初始回文半径, i' = 2 * C - i</span></span><br><span class="line">    radius[i] = (maxRight &gt; i) ? <span class="built_in">Math</span>.min(maxRight - i, radius[<span class="number">2</span> * C - i]) : <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 扩展半径</span></span><br><span class="line">    <span class="keyword">while</span> (s[i + <span class="number">1</span> + radius[i]] &amp;&amp; s[i - <span class="number">1</span> - radius[i]] &amp;&amp; s[i + <span class="number">1</span> + radius[i]] === s[i - <span class="number">1</span> - radius[i]]) radius[i]++;</span><br><span class="line">    <span class="comment">// 更新当前搜索的最大右边界和位置</span></span><br><span class="line">    <span class="keyword">if</span> (i + radius[i] &gt; maxRight) &#123;</span><br><span class="line">      C = i;</span><br><span class="line">      maxRight = i + radius[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 更新最大回文串长度及位置</span></span><br><span class="line">    <span class="keyword">if</span> (maxLen &lt; radius[i]) &#123;</span><br><span class="line">      maxLen = radius[i];</span><br><span class="line">      centerIndex = i;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> s.slice((centerIndex - maxLen), (centerIndex + maxLen + <span class="number">1</span>)).split(<span class="string">'#'</span>).join(<span class="string">''</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>算法效果很好，在 leetcode 上运行时间是 <code>160ms</code>。</p>
+<p>以上。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="http://articles.leetcode.com/2011/11/longest-palindromic-substring-part-i.html" target="_blank" rel="noopener">Longest Palindromic Substring Part I</a></li>
+<li><a href="http://articles.leetcode.com/2011/11/longest-palindromic-substring-part-ii.html" target="_blank" rel="noopener">Longest Palindromic Substring Part II</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Longest_palindromic_substring#Manacher.27s_algorithm" target="_blank" rel="noopener">Wiki:Longest palindromic substring</a></li>
+<li><a href="http://www.felix021.com/blog/read.php?2040" target="_blank" rel="noopener">Manacher’s ALGORITHM: O(n)时间求字符串的最长回文子串</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wxpay.png" alt="萧暮Kyer WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="萧暮Kyer Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    萧暮Kyer
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://muxfe.github.io/2015/12/15/longest-palindrome/" title="最长回文子串">http://muxfe.github.io/2015/12/15/longest-palindrome/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/11/21/using-git-on-ubuntu14/" rel="next" title="在 Ubuntu 14 上使用 Git">
+                <i class="fa fa-chevron-left"></i> 在 Ubuntu 14 上使用 Git
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/01/2015-review/" rel="prev" title="2015 年终总结">
+                2015 年终总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="萧暮Kyer" />
+          <p class="site-author-name" itemprop="name">萧暮Kyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/muxfe" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/b1ackdr3am" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                    
+                      Twitter
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/xw3b" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/muxfe/" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      豆瓣
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#最长回文子串"><span class="nav-number">1.</span> <span class="nav-text">最长回文子串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#回文"><span class="nav-number">1.1.</span> <span class="nav-text">回文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#暴力搜索"><span class="nav-number">1.2.</span> <span class="nav-text">暴力搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态规划"><span class="nav-number">1.3.</span> <span class="nav-text">动态规划</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继续优化"><span class="nav-number">2.</span> <span class="nav-text">继续优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#降低空间复杂度"><span class="nav-number">2.1.</span> <span class="nav-text">降低空间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#降低时间复杂度"><span class="nav-number">2.2.</span> <span class="nav-text">降低时间复杂度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">3.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-star"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">萧暮Kyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

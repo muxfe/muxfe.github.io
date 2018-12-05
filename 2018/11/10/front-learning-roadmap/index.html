@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+      
+    
+    
+      
+    
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="前端,学习路线,新人," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="筑室因藏善本书" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="转眼间已经研三了，从大二开始接触 Web 前端，到读研期间参与实验室大大小小的一些项目，再加上今年暑假的一些实习经历，想对前端的学习方法和路线记录一些自己的思考，作为沉淀。">
+<meta name="keywords" content="前端,学习路线,新人">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端学习路线">
+<meta property="og:url" content="http://muxfe.github.io/2018/11/10/front-learning-roadmap/index.html">
+<meta property="og:site_name" content="筑室因藏善本书">
+<meta property="og:description" content="转眼间已经研三了，从大二开始接触 Web 前端，到读研期间参与实验室大大小小的一些项目，再加上今年暑假的一些实习经历，想对前端的学习方法和路线记录一些自己的思考，作为沉淀。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-05T02:02:27.779Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端学习路线">
+<meta name="twitter:description" content="转眼间已经研三了，从大二开始接触 Web 前端，到读研期间参与实验室大大小小的一些项目，再加上今年暑假的一些实习经历，想对前端的学习方法和路线记录一些自己的思考，作为沉淀。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://muxfe.github.io/2018/11/10/front-learning-roadmap/"/>
+
+
+
+
+
+  <title>前端学习路线 | 筑室因藏善本书</title>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=63365746";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">筑室因藏善本书</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">随笔杂记</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://muxfe.github.io/2018/11/10/front-learning-roadmap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="萧暮Kyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="筑室因藏善本书">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">前端学习路线</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-10T10:03:20+08:00">
+                2018-11-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">前端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>转眼间已经研三了，从大二开始接触 Web 前端，到读研期间参与实验室大大小小的一些项目，再加上今年暑假的一些实习经历，想对前端的学习方法和路线记录一些自己的思考，作为沉淀。</p>
+<a id="more"></a>
+<h1 id="个人经历"><a href="#个人经历" class="headerlink" title="个人经历"></a>个人经历</h1><ul>
+<li>大一学 C/C++，接触基本的编程和计算机知识，学习主要来源于课程和作业实践等。</li>
+<li>大二开始接触 PHP 语言，学习 Web 开发，通过阅读 <a href="https://baike.baidu.com/item/cms%E7%B3%BB%E7%BB%9F/6089246" target="_blank" rel="noopener">CMS</a> 网站源码学习各种知识。</li>
+<li>大三开始转型前端，后端学习 JavaWeb 开发，前端学习 jQuery 等。</li>
+<li>大四在导师实验室做一些项目，主要负责前端，开始使用 Angular1，通过学习 Zepplin 源码。</li>
+<li>研一开始学习 React，用 <a href="https://ant.design/index-cn" target="_blank" rel="noopener">Ant Design</a> 做项目。</li>
+<li>研二开始学习 Vue，用 <a href="http://element-cn.eleme.io/#/zh-CN" target="_blank" rel="noopener">Element-UI</a> 做项目。</li>
+<li>研二暑期在头条实习了三个月,接触 Webpack / Babel 插件等。</li>
+</ul>
+<h1 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h1><p>工欲善其事，必先利其器。下面是一些通用的开发/效率工具，在<a href="http://liqi.io/creators/" target="_blank" rel="noopener">利器</a>可以看其他人的工具箱。</p>
+<h2 id="编辑器"><a href="#编辑器" class="headerlink" title="编辑器"></a>编辑器</h2><ul>
+<li><a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VSCode</a> - 最好的编辑器，没有之一，微软出品</li>
+<li><a href="https://atom.io/" target="_blank" rel="noopener">Atom</a> - GitHub 出的编辑器，大项目卡顿明显</li>
+<li><a href="https://www.sublimetext.com/" target="_blank" rel="noopener">Sublime Text</a> - 轻量级的单文件编辑器</li>
+<li><a href="https://www.ultraedit.com/" target="_blank" rel="noopener">UltraEdit</a> - 打开超大文件（大于 1 GB）必备</li>
+</ul>
+<h2 id="版本管理"><a href="#版本管理" class="headerlink" title="版本管理"></a>版本管理</h2><ul>
+<li><a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a> - Linux 之父开发的大规模代码版本管理工具</li>
+<li><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a> - 最大的同性交友网站</li>
+<li><a href="http://gitee.com/" target="_blank" rel="noopener">码云</a> - 国内的 Git 服务</li>
+</ul>
+<h2 id="浏览器及扩展"><a href="#浏览器及扩展" class="headerlink" title="浏览器及扩展"></a>浏览器及扩展</h2><ul>
+<li><a href="https://www.google.com/chrome/" target="_blank" rel="noopener">Chrome</a> - 谷歌浏览器，不用多介绍了</li>
+<li><a href="https://www.mozilla.org/en-US/firefox/" target="_blank" rel="noopener">Firefox</a> - 今年更新后性能大幅度提升</li>
+<li><a href="https://www.getpostman.com/" target="_blank" rel="noopener">Postman</a> - 浏览器插件，用于测试 API</li>
+<li><a href="https://github.com/FelisCatus/SwitchyOmega" target="_blank" rel="noopener">SwitchOmega</a> - 浏览器代理管理插件</li>
+<li><a href="https://github.com/ovity/octotree" target="_blank" rel="noopener">OctoTree</a> - GitHub 辅助插件，方便浏览仓库目录</li>
+</ul>
+<h2 id="网络抓包工具"><a href="#网络抓包工具" class="headerlink" title="网络抓包工具"></a>网络抓包工具</h2><ul>
+<li><a href="https://www.charlesproxy.com/" target="_blank" rel="noopener">Charles</a> - 抓包代理利器，可用于劫持特定域名测试</li>
+<li><a href="https://www.wireshark.org/" target="_blank" rel="noopener">WireShark</a> - 著名抓包工具</li>
+</ul>
+<h2 id="搜索引擎-知识库"><a href="#搜索引擎-知识库" class="headerlink" title="搜索引擎/知识库"></a>搜索引擎/知识库</h2><p>排名分先后！</p>
+<ul>
+<li><a href="https://www.google.com/" target="_blank" rel="noopener">Google</a> - 自己搞定翻墙</li>
+<li><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a> - 搜开源库/最佳实践/issue 等</li>
+<li><a href="https://stackoverflow.com/" target="_blank" rel="noopener">StackOverflow</a> - 解决各种疑难杂症</li>
+<li><a href="https://cn.bing.com/" target="_blank" rel="noopener">Bing</a> - 如果实在没有翻墙的替代品</li>
+<li><a href="https://segmentfault.com/" target="_blank" rel="noopener">SegmentFault</a> - 中文版 StackOverflow</li>
+<li><a href="https://www.baidu.com/" target="_blank" rel="noopener">Baidu</a> - 对搜索结果擦亮眼睛</li>
+</ul>
+<p>其实 StackOverflow/SegmentFault/Github 的 SEO 都做得很好，所以优先用搜索引擎，注意组合关键词。</p>
+<h2 id="其他工具"><a href="#其他工具" class="headerlink" title="其他工具"></a>其他工具</h2><ul>
+<li><a href="https://shimo.im/" target="_blank" rel="noopener">石墨文档</a> - 在线文档工具，支持多人协作</li>
+<li><a href="https://www.yuque.com/" target="_blank" rel="noopener">语雀</a> - 阿里的团队文档工具</li>
+<li><a href="https://processon.com/" target="_blank" rel="noopener">ProcessOn</a> - 在线画图工具</li>
+<li><a href="https://codesandbox.io" target="_blank" rel="noopener">CodeSandbox</a> - 在线代码编辑器，并可以运行，支持多种框架</li>
+<li><a href="https://cli.im/" target="_blank" rel="noopener">草料二维码生成器</a> - 生成各种二维码的小工具</li>
+</ul>
+<h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><p><a href="https://zh.wikipedia.org/wiki/HTML" target="_blank" rel="noopener">HTML</a> 是一种标记式语言，是 XML 的一个子集，最基础也最简单。</p>
+<ul>
+<li>常用的标签（或者叫元素）</li>
+<li>表单的操作</li>
+<li>多媒体</li>
+</ul>
+<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><p><a href="https://zh.wikipedia.org/wiki/%E5%B1%82%E5%8F%A0%E6%A0%B7%E5%BC%8F%E8%A1%A8" target="_blank" rel="noopener">CSS</a> 是一种声明式语言，易学难精。</p>
+<ul>
+<li>元素选择器</li>
+<li>引入方式和规则的优先级</li>
+<li>盒模型</li>
+<li>行级元素和块级元素</li>
+<li>浮动和定位</li>
+<li>常用布局</li>
+</ul>
+<h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><p><a href="https://zh.wikipedia.org/wiki/JavaScript" target="_blank" rel="noopener">JavaScript</a> 是一种解释型语言，主要为浏览器提供丰富的交互能力，也是易学难精。</p>
+<ul>
+<li>基础语法</li>
+<li>变量和作用域</li>
+<li>函数表达式</li>
+<li>在 HTML 中如何使用</li>
+<li>DOM</li>
+<li>BOM</li>
+<li>事件机制</li>
+<li>表单处理</li>
+<li>Ajax</li>
+<li>JSON</li>
+</ul>
+<h2 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h2><ul>
+<li><a href="https://github.com/skyline75489/what-happens-when-zh_CN" target="_blank" rel="noopener">当你在浏览器中输入 google.com 并且按下回车之后发生了什么</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2012/05/internet_protocol_suite_part_i.html" target="_blank" rel="noopener">互联网协议入门</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2016/06/dns.html" target="_blank" rel="noopener">DNS 原理入门</a></li>
+</ul>
+<h2 id="学习资源"><a href="#学习资源" class="headerlink" title="学习资源"></a>学习资源</h2><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web" target="_blank" rel="noopener">MDN Web 技术文档</a></li>
+<li><a href="http://www.w3school.com.cn/index.html" target="_blank" rel="noopener">W3School</a></li>
+<li><a href="http://www.runoob.com/" target="_blank" rel="noopener">菜鸟教程</a></li>
+<li><a href="http://javascript.ruanyifeng.com/" target="_blank" rel="noopener">JavaScript 标准参考教程（alpha）</a></li>
+<li><a href="http://zh.learnlayout.com/" target="_blank" rel="noopener">学习 CSS 布局</a></li>
+<li><a href="http://www.imooc.com/learn/36" target="_blank" rel="noopener">慕课网 JavaScript 入门篇</a></li>
+</ul>
+<h1 id="中级提升"><a href="#中级提升" class="headerlink" title="中级提升"></a>中级提升</h1><h2 id="HTML5-CSS3"><a href="#HTML5-CSS3" class="headerlink" title="HTML5/CSS3"></a>HTML5/CSS3</h2><p>主要是了解新特性和理解语义化。</p>
+<ul>
+<li><a href="http://www.runoob.com/css3/css3-tutorial.html" target="_blank" rel="noopener">CSS3 教程</a></li>
+<li><a href="http://www.runoob.com/html/html5-intro.html" target="_blank" rel="noopener">HTML5 教程</a></li>
+</ul>
+<h2 id="ECMAScript6"><a href="#ECMAScript6" class="headerlink" title="ECMAScript6"></a><a href="https://en.wikipedia.org/wiki/ECMAScript" target="_blank" rel="noopener">ECMAScript</a>6</h2><p>主要了解 ES6 的新特性及其在工程实践中的用法，配合 Webpack/Babel 等。</p>
+<ul>
+<li><a href="http://es6-features.org" target="_blank" rel="noopener">ES6 的新特性</a></li>
+<li><a href="https://kangax.github.io/compat-table/es6/" target="_blank" rel="noopener">ES6 的支持情况</a></li>
+<li><a href="http://es6.ruanyifeng.com/" target="_blank" rel="noopener">ECMAScript 6 入门</a></li>
+<li><a href="https://github.com/lukehoban/es6features" target="_blank" rel="noopener">lukehoban/es6features</a></li>
+</ul>
+<h2 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h2><p>主要了解为什么要模块化以及如何在浏览器和 Node 中使用，理解不同模块化的思想和适用场景。</p>
+<ul>
+<li><a href="http://www.ruanyifeng.com/blog/2012/10/javascript_module.html" target="_blank" rel="noopener">Javascript模块化编程</a></li>
+<li><a href="https://segmentfault.com/a/1190000012464333" target="_blank" rel="noopener">JavaScript 模块讲解</a></li>
+<li><a href="https://www.infoq.cn/article/es6-in-depth-modules" target="_blank" rel="noopener">深入浅出 ES6 模块</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/22890374" target="_blank" rel="noopener">JavaScript 模块化入门</a></li>
+<li><a href="http://xieyufei.com/2017/02/19/JS-Standard.html" target="_blank" rel="noopener">理解 JS 模块化</a></li>
+<li><a href="https://www.zhihu.com/question/20351507" target="_blank" rel="noopener">AMD 和 CMD 的区别有哪些？</a></li>
+</ul>
+<h2 id="NodeJS"><a href="#NodeJS" class="headerlink" title="NodeJS"></a><a href="https://nodejs.org/" target="_blank" rel="noopener">NodeJS</a></h2><p>NodeJS 扩展了 JavaScript 的能力边界，使它可以用在桌面端和服务器端，用法很多，主要先了解什么是 NodeJS以及如何使用。</p>
+<ul>
+<li><a href="http://www.runoob.com/nodejs/nodejs-tutorial.html" target="_blank" rel="noopener">NodeJS 教程</a></li>
+<li><a href="https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/001434501245426ad4b91f2b880464ba876a8e3043fc8ef000" target="_blank" rel="noopener">廖雪峰的 NodeJS 教程</a></li>
+<li><a href="https://www.nodebeginner.org/index-zh-cn.html" target="_blank" rel="noopener">Node 入门</a></li>
+<li><a href="https://www.zhihu.com/question/19793473" target="_blank" rel="noopener">怎样有效地学习 Node.js？</a></li>
+<li><a href="https://nqdeng.github.io/7-days-nodejs/" target="_blank" rel="noopener">七天学会NodeJS</a></li>
+<li><a href="https://github.com/i0natan/nodebestpractices" target="_blank" rel="noopener">NodeJS Best Practices</a></li>
+</ul>
+<h2 id="基础框架"><a href="#基础框架" class="headerlink" title="基础框架"></a>基础框架</h2><p>这些是今年比较主流的前端框架，不需要全部掌握，主要理解框架的用法和思想，适用的场景和解决的问题等。框架只是基础能力的最佳实践，变化很快，不要过于以来框架，而是驾驭框架。</p>
+<ul>
+<li><a href="https://jquery.com/" target="_blank" rel="noopener">jQuery</a><ul>
+<li><a href="http://www.runoob.com/jquery/jquery-tutorial.html" target="_blank" rel="noopener">jQuery 教程</a></li>
+<li><a href="https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000" target="_blank" rel="noopener">廖雪峰的 JS 教程</a></li>
+<li><a href="https://www.zhihu.com/question/19667102" target="_blank" rel="noopener">新手如何学习 jQuery？</a></li>
+</ul>
+</li>
+<li><a href="https://getbootstrap.com/" target="_blank" rel="noopener">BootStrap</a><ul>
+<li><a href="http://www.runoob.com/bootstrap/bootstrap-tutorial.html" target="_blank" rel="noopener">BootStrap 教程</a></li>
+<li><a href="https://www.zhihu.com/question/20221979" target="_blank" rel="noopener">如何学习 twitter bootstrap？</a></li>
+</ul>
+</li>
+<li><a href="https://reactjs.org/" target="_blank" rel="noopener">React</a><ul>
+<li><a href="http://www.runoob.com/react/react-tutorial.html" target="_blank" rel="noopener">React 教程</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2015/03/react.html" target="_blank" rel="noopener">React 入门实例教程</a></li>
+<li><a href="http://huziketang.mangojuice.top/books/react/" target="_blank" rel="noopener">React.js 小书</a></li>
+<li><a href="https://react.docschina.org/tutorial/tutorial.html" target="_blank" rel="noopener">React 入门教程</a></li>
+<li>组件库：<a href="https://ant.design/docs/react/introduce-cn" target="_blank" rel="noopener">Ant Design</a>/<a href="https://react.semantic-ui.com/" target="_blank" rel="noopener">SemanticUI</a>…</li>
+</ul>
+</li>
+<li><a href="https://cn.vuejs.org/v2/guide/index.html" target="_blank" rel="noopener">Vue</a><ul>
+<li><a href="http://www.runoob.com/vue2/vue-tutorial.html" target="_blank" rel="noopener">Vue 教程</a></li>
+<li><a href="https://github.com/liangxiaojuan/vue-todos" target="_blank" rel="noopener">Vue Todos</a></li>
+<li>组件库：<a href="http://element-cn.eleme.io/#/zh-CN" target="_blank" rel="noopener">ElementUI</a>/<a href="https://muse-ui.org/#/zh-CN" target="_blank" rel="noopener">MuseUI</a>/<a href="https://www.iviewui.com/" target="_blank" rel="noopener">iViewUI</a>…</li>
+<li>移动端：<a href="http://mint-ui.github.io/#!/zh-cn" target="_blank" rel="noopener">MintUI</a>/<a href="https://vux.li/" target="_blank" rel="noopener">Vux</a>…</li>
+</ul>
+</li>
+<li><a href="https://angular.io/" target="_blank" rel="noopener">Angular</a><ul>
+<li><a href="http://www.runoob.com/angularjs/angularjs-tutorial.html" target="_blank" rel="noopener">AngularJS 教程</a></li>
+<li><a href="https://angular.cn/guide/quickstart" target="_blank" rel="noopener">快速上手</a></li>
+<li>组件库：<a href="https://ng-bootstrap.github.io/" target="_blank" rel="noopener">NgBootStrap</a>/<a href="https://material.angular.io/" target="_blank" rel="noopener">Material2</a>/<a href="https://www.primefaces.org/primeng/" target="_blank" rel="noopener">PrimeNg</a>…</li>
+</ul>
+</li>
+</ul>
+<h2 id="编码规范"><a href="#编码规范" class="headerlink" title="编码规范"></a>编码规范</h2><p>工程项目变大以后，规范就会显得尤为重要。良好的规范可以提升开发和协作效率，易扩展维护等。编码规范有些已经达成共识，有些则全凭团队/个人喜好，没有对错，只要遵守适应就可以。</p>
+<ul>
+<li><a href="http://alloyteam.github.io/CodeGuide/" target="_blank" rel="noopener">AlloyTeam 的团队编码规范</a></li>
+<li><a href="https://guide.aotu.io/" target="_blank" rel="noopener">京东凹凸实验室的编码规范</a></li>
+<li><a href="https://github.com/airbnb/javascript" target="_blank" rel="noopener">Airbnb 编码规范</a></li>
+<li><a href="https://google.github.io/styleguide/jsguide.html" target="_blank" rel="noopener">Google JS 编码规范</a></li>
+<li><a href="https://github.com/pablohpsilva/vuejs-component-style-guide" target="_blank" rel="noopener">Vue 组件编码规范</a></li>
+</ul>
+<p>可以用工具来强制团队所遵循的编码规范，如</p>
+<ul>
+<li><a href="https://eslint.org/" target="_blank" rel="noopener">ESLint</a></li>
+<li><a href="https://github.com/prettier/prettier" target="_blank" rel="noopener">Prettier</a></li>
+<li><a href="https://github.com/douglascrockford/JSLint" target="_blank" rel="noopener">JSLint</a></li>
+</ul>
+<h1 id="高级进阶"><a href="#高级进阶" class="headerlink" title="高级进阶"></a>高级进阶</h1><h2 id="标准规范"><a href="#标准规范" class="headerlink" title="标准规范"></a>标准规范</h2><p>标准规范是基石，可谓万变不离其宗。</p>
+<ul>
+<li><a href="https://www.w3.org/standards/" target="_blank" rel="noopener">W3C</a></li>
+<li><a href="https://www.w3.org/Protocols/" target="_blank" rel="noopener">HTTP</a></li>
+<li><a href="https://http2.github.io/" target="_blank" rel="noopener">HTTP/2</a></li>
+<li><a href="https://github.com/tc39/ecma262" target="_blank" rel="noopener">ECMA-262</a></li>
+</ul>
+<h2 id="前端工程化"><a href="#前端工程化" class="headerlink" title="前端工程化"></a>前端工程化</h2><p>现在但凡带框架的前端项目已经离不开工程化了，从脚手架，Mock，Babel，CSS 预处理器，Webpack 大礼包，到测试，构建，ci，发布等。</p>
+<ul>
+<li><a href="https://gulpjs.com/" target="_blank" rel="noopener">Gulp</a></li>
+<li><a href="https://webpack.js.org/" target="_blank" rel="noopener">Webpack</a></li>
+<li>CSS 预处理器<ul>
+<li><a href="http://lesscss.org/" target="_blank" rel="noopener">Less</a></li>
+<li><a href="https://sass-lang.com/" target="_blank" rel="noopener">Sass</a></li>
+</ul>
+</li>
+<li><a href="https://babeljs.io/" target="_blank" rel="noopener">Babel</a><ul>
+<li><a href="http://www.ruanyifeng.com/blog/2016/01/babel.html" target="_blank" rel="noopener">Babel 入门教程</a></li>
+</ul>
+</li>
+<li><a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a></li>
+</ul>
+<h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><p>设计模式是一些沉淀下来好的开发方式，不同的设计模式应用于不同的场景，在操作系统、数据库、开源框架中，设计模式几乎无处不在。前端中也包含很多设计模式，值得学习提高。</p>
+<ul>
+<li><a href="http://www.ruanyifeng.com/blog/2015/02/mvcmvp_mvvm.html" target="_blank" rel="noopener">MVC，MVP 和 MVVM 的图示</a></li>
+<li><a href="https://juejin.im/post/593021272f301e0058273468" target="_blank" rel="noopener">浅析前端开发中的 MVC/MVP/MVVM 模式</a></li>
+<li><a href="http://efe.baidu.com/blog/mvc-deformation/" target="_blank" rel="noopener">前端 MVC 变形记</a></li>
+<li><a href="https://www.zhihu.com/question/20148405" target="_blank" rel="noopener">你对 MVC、MVP、MVVM 三种组合模式分别有什么样的理解？</a></li>
+<li><a href="https://draveness.me/mvx" target="_blank" rel="noopener">浅谈 MVC、MVP 和 MVVM 架构模式</a></li>
+<li><a href="https://github.com/TooBug/javascript.patterns" target="_blank" rel="noopener">JavaScript Patterns 中译本</a></li>
+<li><a href="http://www.alloyteam.com/2012/10/common-javascript-design-patterns/" target="_blank" rel="noopener">AlloyTeam/JavaScript 设计模式</a></li>
+</ul>
+<h2 id="测试-CI"><a href="#测试-CI" class="headerlink" title="测试/CI"></a>测试/CI</h2><p>测试在大型软件开发中是很重要的，还有以测试为主的 <a href="https://en.wikipedia.org/wiki/Test-driven_development" target="_blank" rel="noopener">TDD</a> 软件开发模式。测试在开源项目中也是衡量其质量的关键。</p>
+<ul>
+<li>工具<ul>
+<li><a href="https://mochajs.org/" target="_blank" rel="noopener">Mocha</a> - 测试框架</li>
+<li><a href="https://jestjs.io/" target="_blank" rel="noopener">Jest</a> - 测试框架</li>
+<li><a href="https://jasmine.github.io/" target="_blank" rel="noopener">Jasmine</a> - 测试框架</li>
+<li><a href="https://www.chaijs.com/" target="_blank" rel="noopener">Chai</a> - 断言库</li>
+<li><a href="https://shouldjs.github.io/" target="_blank" rel="noopener">Should.js</a> - 断言库</li>
+<li><a href="https://www.seleniumhq.org/" target="_blank" rel="noopener">Selenium</a> - 仿真</li>
+<li><a href="https://pptr.dev/" target="_blank" rel="noopener">Puppeteer</a> - 无头浏览器</li>
+</ul>
+</li>
+<li><a href="http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html" target="_blank" rel="noopener">测试框架 Mocha 实例教程</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2016/02/react-testing-tutorial.html" target="_blank" rel="noopener">React 测试入门教程</a></li>
+<li><a href="http://javascript.ruanyifeng.com/tool/testing.html" target="_blank" rel="noopener">JavaScript 程序测试</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2015/06/istanbul.html" target="_blank" rel="noopener">代码覆盖率工具 Istanbul 入门教程</a></li>
+<li><a href="http://fex.baidu.com/blog/2015/07/front-end-test/" target="_blank" rel="noopener">FEX/前端自动化测试探索</a></li>
+<li><a href="https://www.zhihu.com/question/29922082" target="_blank" rel="noopener">如何进行前端自动化测试？</a></li>
+<li><a href="http://imweb.io/topic/579ddf3e93d9938132cc8d87" target="_blank" rel="noopener">IMWeb/测试用例的那一回事</a></li>
+<li><a href="http://efe.baidu.com/blog/front-end-continuous-integration-tools/" target="_blank" rel="noopener">前端开源项目持续集成三剑客</a></li>
+<li><a href="https://segmentfault.com/a/1190000007221668" target="_blank" rel="noopener">前端持续集成解决方案</a></li>
+<li><a href="https://www.zhihu.com/question/60194439" target="_blank" rel="noopener">如何实现前端工程的持续集成与持续部署？</a></li>
+<li><a href="https://segmentfault.com/a/1190000005859766" target="_blank" rel="noopener">一个靠谱的前端开源项目需要什么？</a></li>
+</ul>
+<h2 id="发布-部署"><a href="#发布-部署" class="headerlink" title="发布/部署"></a>发布/部署</h2><p>前端代码经过编译/转换/压缩等处理后就可以发布了，具体选择哪种发布方式取决于后端采用的技术。传统的方式是将前端代码放到后端工程中静态资源部署的位置，现在更流行的是前后端解耦的方式、容器化，如 Nginx 反向代理和 Docker 镜像。学习 Shell 脚本编程可以把很多过程脚本自动化。</p>
+<ul>
+<li><a href="https://juejin.im/post/5b01336af265da0b8a67e5c9" target="_blank" rel="noopener">Nginx 反向代理</a></li>
+<li><a href="https://github.com/qinjx/30min_guides/blob/master/shell.md" target="_blank" rel="noopener">Shell 脚本编程 30 分钟入门</a></li>
+<li><a href="https://www.docker.com/" target="_blank" rel="noopener">Docker</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html" target="_blank" rel="noopener">阮一峰/Docker 入门教程</a></li>
+</ul>
+<h2 id="其他方向"><a href="#其他方向" class="headerlink" title="其他方向"></a>其他方向</h2><p>前端现在变化和发展很快，甚至有一统客户端和桌面端之势，但是还要根据具体应用场景和技术要求来选择，软件开发没有银弹。</p>
+<ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1" target="_blank" rel="noopener">响应式设计</a></li>
+<li>移动端：<a href="https://facebook.github.io/react-native/" target="_blank" rel="noopener">RN</a>/<a href="https://weex.incubator.apache.org/" target="_blank" rel="noopener">Weex</a>/<a href="https://mp.weixin.qq.com/cgi-bin/wx" target="_blank" rel="noopener">小程序</a>…</li>
+<li><a href="https://baike.baidu.com/item/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E6%A0%B8" target="_blank" rel="noopener">浏览器内核</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/JavaScript%E5%BC%95%E6%93%8E" target="_blank" rel="noopener">JavaScript 引擎</a></li>
+<li>NodeJS 服务端框架：<a href="https://expressjs.com/" target="_blank" rel="noopener">Expressjs</a>/<a href="https://koajs.com/" target="_blank" rel="noopener">Koa</a>…</li>
+<li><a href="https://electronjs.org/" target="_blank" rel="noopener">Electron</a></li>
+<li><a href="https://webassembly.org/" target="_blank" rel="noopener">WebAssembly</a></li>
+</ul>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p>下面是很多大牛总结收集的前端知识图谱，内容很多，可以根据自己的学习计划和兴趣来深入学习，同时要保持求知欲和一个良好的技术视野。</p>
+<ul>
+<li><a href="https://s3.cn-north-1.amazonaws.com.cn/static-documents/nd001/Front-End+Skills+Cheklist_ZH.pdf" target="_blank" rel="noopener">前端工程师技能清单</a></li>
+<li><a href="https://leohxj.gitbooks.io/front-end-database/interview/skill-path.html" target="_blank" rel="noopener">前端技能图谱</a></li>
+<li><a href="https://segmentfault.com/a/1190000010548504" target="_blank" rel="noopener">如何准备一份好的前端面试简历？</a></li>
+<li><a href="https://github.com/JacksonTian/fks" target="_blank" rel="noopener">朴灵前端技能汇总</a></li>
+<li><a href="https://www.zhihu.com/question/19637373" target="_blank" rel="noopener">零基础开始学 Web 前端开发，有什么建议吗？</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21935921" target="_blank" rel="noopener">前端学习路径</a></li>
+<li><a href="https://juejin.im/post/5a5e28b2f265da3e355b1451" target="_blank" rel="noopener">2018 Web 开发者最佳学习路线（中文版）</a></li>
+<li><a href="https://github.com/qiu-deqing/FE-learning" target="_blank" rel="noopener">qiu-deqing/FE-learning</a></li>
+<li><a href="https://www.zhihu.com/question/22591993" target="_blank" rel="noopener">前端开发工程师必读书籍有哪些值得推荐？</a></li>
+<li><a href="https://github.com/smyhvae/Web" target="_blank" rel="noopener">前端入门和进阶学习笔记</a></li>
+<li><a href="https://github.com/RubyLouvre/newland/issues/6" target="_blank" rel="noopener">github上值得关注的前端项目</a></li>
+<li><a href="https://www.zhihu.com/question/26886835" target="_blank" rel="noopener">在 GitHub 上有哪些适合前端初学者学习的开源项目？</a></li>
+<li><a href="https://github.com/neal1991/articles-translator" target="_blank" rel="noopener">技术文章翻译</a></li>
+<li><a href="https://www.zhihu.com/question/286700472" target="_blank" rel="noopener">前端未来几年的发展方向是什么？</a></li>
+<li><a href="https://www.zhihu.com/question/286700472" target="_blank" rel="noopener">每个 JavaScript 工程师都应懂的33个概念</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wxpay.png" alt="萧暮Kyer WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="萧暮Kyer Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    萧暮Kyer
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://muxfe.github.io/2018/11/10/front-learning-roadmap/" title="前端学习路线">http://muxfe.github.io/2018/11/10/front-learning-roadmap/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+            <a href="/tags/学习路线/" rel="tag"># 学习路线</a>
+          
+            <a href="/tags/新人/" rel="tag"># 新人</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/22/fe-news/" rel="next" title="追踪前端技术视野">
+                <i class="fa fa-chevron-left"></i> 追踪前端技术视野
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="萧暮Kyer" />
+          <p class="site-author-name" itemprop="name">萧暮Kyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/muxfe" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/b1ackdr3am" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                    
+                      Twitter
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/xw3b" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/muxfe/" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      豆瓣
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#个人经历"><span class="nav-number">1.</span> <span class="nav-text">个人经历</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开发工具"><span class="nav-number">2.</span> <span class="nav-text">开发工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编辑器"><span class="nav-number">2.1.</span> <span class="nav-text">编辑器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本管理"><span class="nav-number">2.2.</span> <span class="nav-text">版本管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器及扩展"><span class="nav-number">2.3.</span> <span class="nav-text">浏览器及扩展</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络抓包工具"><span class="nav-number">2.4.</span> <span class="nav-text">网络抓包工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索引擎-知识库"><span class="nav-number">2.5.</span> <span class="nav-text">搜索引擎/知识库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他工具"><span class="nav-number">2.6.</span> <span class="nav-text">其他工具</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基础知识"><span class="nav-number">3.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML"><span class="nav-number">3.1.</span> <span class="nav-text">HTML</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS"><span class="nav-number">3.2.</span> <span class="nav-text">CSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript"><span class="nav-number">3.3.</span> <span class="nav-text">JavaScript</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web"><span class="nav-number">3.4.</span> <span class="nav-text">Web</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学习资源"><span class="nav-number">3.5.</span> <span class="nav-text">学习资源</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#中级提升"><span class="nav-number">4.</span> <span class="nav-text">中级提升</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML5-CSS3"><span class="nav-number">4.1.</span> <span class="nav-text">HTML5/CSS3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ECMAScript6"><span class="nav-number">4.2.</span> <span class="nav-text">ECMAScript6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块化"><span class="nav-number">4.3.</span> <span class="nav-text">模块化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NodeJS"><span class="nav-number">4.4.</span> <span class="nav-text">NodeJS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础框架"><span class="nav-number">4.5.</span> <span class="nav-text">基础框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编码规范"><span class="nav-number">4.6.</span> <span class="nav-text">编码规范</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高级进阶"><span class="nav-number">5.</span> <span class="nav-text">高级进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#标准规范"><span class="nav-number">5.1.</span> <span class="nav-text">标准规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前端工程化"><span class="nav-number">5.2.</span> <span class="nav-text">前端工程化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设计模式"><span class="nav-number">5.3.</span> <span class="nav-text">设计模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试-CI"><span class="nav-number">5.4.</span> <span class="nav-text">测试/CI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布-部署"><span class="nav-number">5.5.</span> <span class="nav-text">发布/部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他方向"><span class="nav-number">5.6.</span> <span class="nav-text">其他方向</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考链接"><span class="nav-number">6.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-star"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">萧暮Kyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

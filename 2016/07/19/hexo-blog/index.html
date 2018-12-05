@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+      
+    
+    
+      
+    
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="web,hexo," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="筑室因藏善本书" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="hexo 介绍hexo 是一个使用 markdown 解析生成静态网页的框架，这样的框架还有 jekyll，前者基于 nodejs，后者基于 Ruby。但都使用 .yml 作为配置文件。之前用过 jekyll 搭建静态博客，但是在入门难易程度，包管理器生态环境和速度方面，貌似 hexo 更好一些。 hexo 默认使用 ejs 作为解析模板，默认 markdown 解析也与 GitHub 最为相似。">
+<meta name="keywords" content="web,hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo + fexo 搭建 GitHub-Pages 静态博客">
+<meta property="og:url" content="http://muxfe.github.io/2016/07/19/hexo-blog/index.html">
+<meta property="og:site_name" content="筑室因藏善本书">
+<meta property="og:description" content="hexo 介绍hexo 是一个使用 markdown 解析生成静态网页的框架，这样的框架还有 jekyll，前者基于 nodejs，后者基于 Ruby。但都使用 .yml 作为配置文件。之前用过 jekyll 搭建静态博客，但是在入门难易程度，包管理器生态环境和速度方面，貌似 hexo 更好一些。 hexo 默认使用 ejs 作为解析模板，默认 markdown 解析也与 GitHub 最为相似。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-27T09:01:19.212Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hexo + fexo 搭建 GitHub-Pages 静态博客">
+<meta name="twitter:description" content="hexo 介绍hexo 是一个使用 markdown 解析生成静态网页的框架，这样的框架还有 jekyll，前者基于 nodejs，后者基于 Ruby。但都使用 .yml 作为配置文件。之前用过 jekyll 搭建静态博客，但是在入门难易程度，包管理器生态环境和速度方面，貌似 hexo 更好一些。 hexo 默认使用 ejs 作为解析模板，默认 markdown 解析也与 GitHub 最为相似。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://muxfe.github.io/2016/07/19/hexo-blog/"/>
+
+
+
+
+
+  <title>hexo + fexo 搭建 GitHub-Pages 静态博客 | 筑室因藏善本书</title>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=63365746";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">筑室因藏善本书</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">随笔杂记</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://muxfe.github.io/2016/07/19/hexo-blog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="萧暮Kyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="筑室因藏善本书">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">hexo + fexo 搭建 GitHub-Pages 静态博客</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-19T13:50:00+08:00">
+                2016-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">前端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="hexo-介绍"><a href="#hexo-介绍" class="headerlink" title="hexo 介绍"></a>hexo 介绍</h2><p>hexo 是一个使用 markdown 解析生成静态网页的框架，这样的框架还有 jekyll，前者基于 nodejs，后者基于 Ruby。但都使用 <code>.yml</code> 作为配置文件。之前用过 jekyll 搭建静态博客，但是在入门难易程度，包管理器生态环境和速度方面，貌似 hexo 更好一些。</p>
+<p>hexo 默认使用 <a href="http://www.embeddedjs.com/" target="_blank" rel="noopener">ejs</a> 作为解析模板，默认 markdown 解析也与 GitHub 最为相似。书写，本地预览和部署到 GitHub repo 都非常方便。</p>
+<a id="more"></a>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="安装-Git-Bash"><a href="#安装-Git-Bash" class="headerlink" title="安装 Git-Bash"></a>安装 Git-Bash</h3><ul>
+<li>Win - <a href="https://git-scm.com/download/win" target="_blank" rel="noopener">download</a></li>
+<li>Linux - <code>sudo apt-get install git</code></li>
+</ul>
+<p>在 Linux 上配置 Git 参考<a href="http://x-web.github.io/2015/11/21/using-git-on-ubuntu14/" target="_blank" rel="noopener">这里</a>.</p>
+<h3 id="安装-Node"><a href="#安装-Node" class="headerlink" title="安装 Node"></a>安装 Node</h3><ul>
+<li>Win - <a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">download</a></li>
+<li>Linux - <code>sudo apt-get install nodejs</code> or install <a href="https://github.com/creationix/nvm" target="_blank" rel="noopener">nvm</a></li>
+</ul>
+<p>查看 nodejs 和 npm 版本<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure></p>
+<h3 id="安装-hexo"><a href="#安装-hexo" class="headerlink" title="安装 hexo"></a>安装 hexo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> my-hexo-blog</span><br><span class="line">npm install hexo --save</span><br></pre></td></tr></table></figure>
+<p>由于网络环境的原因，现在 npm 安装也非常慢，可以使用淘宝的 npm 镜像 - cnpm 来更快地安装包。参考<a href="https://npm.taobao.org/" target="_blank" rel="noopener">这里</a>.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br><span class="line">cnpm install hexo</span><br></pre></td></tr></table></figure>
+<h2 id="测试运行-hexo"><a href="#测试运行-hexo" class="headerlink" title="测试运行 hexo"></a>测试运行 hexo</h2><h3 id="设置-hexo-运行脚本"><a href="#设置-hexo-运行脚本" class="headerlink" title="设置 hexo 运行脚本"></a>设置 hexo 运行脚本</h3><p>本人不太喜欢全局安装 npm 包，所以想要使用局部安装的 hexo，需要运行 <code>./node_modules/.bin/hexo</code>，但是这样很麻烦，可以在项目根目录中写相应的脚本来更好的使用 hexo 命令。</p>
+<h4 id="BAT"><a href="#BAT" class="headerlink" title="BAT"></a>BAT</h4><p>在项目根目录下创建 <code>hexo.bat</code> 文件，内容如下：</p>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">ECHO</span> off</span><br><span class="line"><span class="built_in">SET</span> PARAM=</span><br><span class="line">:LOOP</span><br><span class="line">    <span class="keyword">IF</span> [%<span class="number">1</span>]==[] <span class="keyword">GOTO</span> END</span><br><span class="line">    <span class="built_in">SET</span> PARAM=<span class="variable">%PARAM%</span> "%<span class="number">1</span>"</span><br><span class="line">    <span class="built_in">shift</span></span><br><span class="line">    <span class="keyword">GOTO</span> LOOP</span><br><span class="line">:END</span><br><span class="line">node_modules\.bin\hexo <span class="variable">%PARAM%</span></span><br></pre></td></tr></table></figure>
+<h4 id="BASH"><a href="#BASH" class="headerlink" title="BASH"></a>BASH</h4><p>在项目根目录下创建 <code>hexo</code> 文件，内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"node/node"</span> <span class="string">"./node_modules/.bin/hexo"</span> <span class="string">"<span class="variable">$@</span>"</span></span><br></pre></td></tr></table></figure>
+<p>这样就可以在项目根目录下使用局部 hexo 命令了。</p>
+<h3 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+<p>初始化完成后，会形成下面的 hexo 项目结构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">./</span><br><span class="line">├─ public/ - 生成静态页面存放目录</span><br><span class="line">├─ source/ - md/css 等其他源文件</span><br><span class="line">│   ├─ _drafts/ - 草稿 hexo new draft &lt;title&gt;</span><br><span class="line">│   ├─ _post/ - 文章 hexo new &lt;title&gt;</span><br><span class="line">│   └─ .../</span><br><span class="line">├─ scaffolds/ - 脚手架，即新建文章（或其他类型）时初始化的模板</span><br><span class="line">├─ themes/</span><br><span class="line">│   ├─ landscape/ - 3.2.2 默认主题</span><br><span class="line">│   └─ .../</span><br><span class="line">├─ node_modules/</span><br><span class="line">├─ .deploy_git/ - 部署临时文件夹 hexo deploy</span><br><span class="line">├─ db.json - 本地 web 服务器使用的临时文件</span><br><span class="line">├─ _config.yml - hexo 配置文件</span><br><span class="line">└─ package.json - npm 包依赖描述文件</span><br></pre></td></tr></table></figure>
+<h3 id="生成静态页面"><a href="#生成静态页面" class="headerlink" title="生成静态页面"></a>生成静态页面</h3><p>其中 public 目录存放 hexo 生成的静态页面。运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
+<p>会创建 public 目录并生成所有静态页面。</p>
+<p>为了在本地预览，hexo 还提供了一个本地 web 服务器环境。运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+<p>运行成功后，通过访问 <a href="http://localhost:4000" target="_blank" rel="noopener">localhost:4000</a> 即可预览。</p>
+<h2 id="使用-fexo-主题"><a href="#使用-fexo-主题" class="headerlink" title="使用 fexo 主题"></a>使用 fexo 主题</h2><h3 id="安装-fexo-主题"><a href="#安装-fexo-主题" class="headerlink" title="安装 fexo 主题"></a>安装 fexo 主题</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> my-hexo-blog/themes/</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/forsigner/fexo.git</span><br></pre></td></tr></table></figure>
+<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>修改博客根目录下的 <code>_config.yml</code> 中的 <code>theme</code> 为 <code>fexo</code>.</p>
+<p>配置 <code>themes/fexo/_config.yml</code> 参考<a href="http://forsigner.com/2016/03/10/fexo-doc-zh-cn/" target="_blank" rel="noopener">这里</a>.</p>
+<h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rss 支持</span></span><br><span class="line">npm install hexo-generator-feed --save</span><br><span class="line"><span class="comment"># sitemap 支持</span></span><br><span class="line">npm install hexo-generator-sitemap --save</span><br><span class="line"><span class="comment"># search 支持</span></span><br><span class="line">npm install hexo-generator-search --save</span><br></pre></td></tr></table></figure>
+<h3 id="在-fexo-中自定义样式"><a href="#在-fexo-中自定义样式" class="headerlink" title="在 fexo 中自定义样式"></a>在 fexo 中自定义样式</h3><p>fexo 的自定义样式由其配置文件 <code>fexo/_config.yml</code> 中的 <code>personal_style:</code> 设置。对应值的路径相对与 <code>my-hexo-blog/source/</code>，如设置 <code>personal_style: /css/custom.css</code>，则应该创建 <code>my-hexo-blog/source/css/custom.css</code> 文件，并在其中设置样式。</p>
+<h3 id="其他不错的主题"><a href="#其他不错的主题" class="headerlink" title="其他不错的主题"></a>其他不错的主题</h3><ul>
+<li><a href="https://github.com/steven5538/hexo-theme-athena" target="_blank" rel="noopener">athena</a> - <em><a href="http://steven5538.tw/" target="_blank" rel="noopener">demo</a></em></li>
+<li><a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">next</a> - <em><a href="http://heroicyang.com/" target="_blank" rel="noopener">demo</a></em></li>
+<li><a href="https://github.com/lenbo-ma/hexo-theme-vno" target="_blank" rel="noopener">vno</a> - <em><a href="http://mlongbo.com/" target="_blank" rel="noopener">demo</a></em></li>
+</ul>
+<h2 id="第三方服务"><a href="#第三方服务" class="headerlink" title="第三方服务"></a>第三方服务</h2><h3 id="使用百度统计"><a href="#使用百度统计" class="headerlink" title="使用百度统计"></a>使用百度统计</h3><p>在<a href="http://tongji.baidu.com/" target="_blank" rel="noopener">百度统计</a>申请账号，拿到自己的 token，并将其填入 <code>fexo/_config.yml</code> 中的 <code>baidu_analytics:</code> 属性值。</p>
+<h3 id="使用-Disqus-评论"><a href="#使用-Disqus-评论" class="headerlink" title="使用 Disqus 评论"></a>使用 Disqus 评论</h3><p>在<a href="https://disqus.com/" target="_blank" rel="noopener">DISQUS</a>注册，并申请自己的二级域名。在个人账户页面，<code>Setting -&gt; Add Disqus To Site -&gt; GET STARTED</code>，然后填写相应信息。将自己申请的 Disqus 二级域名填如 <code>fexo/_config.yml</code> 中的 <code>disqus_shortname:</code> 属性值。</p>
+<p>也可以使用<a href="http://duoshuo.com/" target="_blank" rel="noopener">多说</a>评论，修改 <code>duoshuo_shortname:</code> 并注释 Disqus 即可。</p>
+<h2 id="使用-GitHub-Pages-部署网站"><a href="#使用-GitHub-Pages-部署网站" class="headerlink" title="使用 GitHub Pages 部署网站"></a>使用 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> 部署网站</h2><p>GitHub 提供免费的 300M 网站空间，使得开发者可以静态展示自己的项目或网站。要使用 GitHub Pages 功能，首先申请 GitHub 账号，然后创建一个公开项目 <code>[yourname].github.io</code>。</p>
+<p>修改 <code>my-hexo-blog/_config.yml</code> 中的 <code>deploy</code> 属性；</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repo:</span> <span class="attr">https://github.com/[yourname]/[yourname].github.io.git</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span></span><br><span class="line"><span class="attr">  message:</span> <span class="string">'update blog'</span></span><br></pre></td></tr></table></figure>
+<p>设置好后，在根目录运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<p>如果没有配置 ssh-key，需要输入 GitHub 的账号密码。</p>
+<p>若不想使用 <code>hexo deploy</code> 命令，还可以自己 push <code>public/</code> 中的静态页面到 <code>[yourname].github.io.git</code> 代码仓库。可以先 clone 仓库到本地，然后拷贝其中的 <code>.git</code> 文件夹到 <code>my-hexo-blog/public/</code> 中，再使用 <code>git</code> 同步到远端库。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add -A</span><br><span class="line">git commit -m <span class="string">"update my blog"</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+<h2 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h2><h3 id="gulp-压缩"><a href="#gulp-压缩" class="headerlink" title="gulp 压缩"></a>gulp 压缩</h3><p>安装 gulp 相关依赖包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">npm install gulp --save</span><br><span class="line">npm install gulp-htmlclean --save</span><br><span class="line">npm install gulp-htmlmin --save</span><br><span class="line">npm install gulp-imagemin --save</span><br><span class="line">npm install gulp-minify-css --save</span><br><span class="line">npm install gulp-uglify --save</span><br></pre></td></tr></table></figure>
+<p>编写 gulpfile.js 文件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">var</span> minifycss = <span class="built_in">require</span>(<span class="string">'gulp-minify-css'</span>);</span><br><span class="line"><span class="keyword">var</span> uglify = <span class="built_in">require</span>(<span class="string">'gulp-uglify'</span>);</span><br><span class="line"><span class="keyword">var</span> htmlmin = <span class="built_in">require</span>(<span class="string">'gulp-htmlmin'</span>);</span><br><span class="line"><span class="keyword">var</span> htmlclean = <span class="built_in">require</span>(<span class="string">'gulp-htmlclean'</span>);</span><br><span class="line"><span class="keyword">var</span> imagemin = <span class="built_in">require</span>(<span class="string">'gulp-imagemin'</span>)</span><br><span class="line"><span class="comment">// 压缩 css</span></span><br><span class="line">gulp.task(<span class="string">'minify-css'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> gulp.src(<span class="string">'./public/**/*.css'</span>)</span><br><span class="line">       .pipe(minifycss())</span><br><span class="line">       .pipe(gulp.dest(<span class="string">'./public'</span>));</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 压缩 html</span></span><br><span class="line">gulp.task(<span class="string">'minify-html'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> <span class="keyword">return</span> gulp.src(<span class="string">'./public/**/*.html'</span>)</span><br><span class="line">   .pipe(htmlclean())</span><br><span class="line">   .pipe(htmlmin(&#123;</span><br><span class="line">        removeComments: <span class="literal">true</span>,</span><br><span class="line">        minifyJS: <span class="literal">true</span>,</span><br><span class="line">        minifyCSS: <span class="literal">true</span>,</span><br><span class="line">        minifyURLs: <span class="literal">true</span>,</span><br><span class="line">   &#125;))</span><br><span class="line">   .pipe(gulp.dest(<span class="string">'./public'</span>))</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 压缩 js</span></span><br><span class="line">gulp.task(<span class="string">'minify-js'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> gulp.src(<span class="string">'./public/**/*.js'</span>)</span><br><span class="line">       .pipe(uglify())</span><br><span class="line">       .pipe(gulp.dest(<span class="string">'./public'</span>));</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 压缩图片</span></span><br><span class="line">gulp.task(<span class="string">'images'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">   gulp.src(<span class="string">'./public/images/*.*'</span>)</span><br><span class="line">       .pipe(imagemin(&#123;</span><br><span class="line">           progressive: <span class="literal">true</span></span><br><span class="line">       &#125;))</span><br><span class="line">       .pipe(gulp.dest(<span class="string">'./public'</span>))</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 执行 gulp 命令时执行的任务</span></span><br><span class="line">gulp.task(<span class="string">'default'</span>, [</span><br><span class="line">   <span class="string">'minify-html'</span>,<span class="string">'minify-css'</span>,<span class="string">'minify-js'</span>,<span class="string">'images'</span></span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
+<p>新建 gulp.bat</p>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">ECHO</span> off</span><br><span class="line"><span class="built_in">SET</span> PARAM=</span><br><span class="line">:LOOP</span><br><span class="line">    <span class="keyword">IF</span> [%<span class="number">1</span>]==[] <span class="keyword">GOTO</span> END</span><br><span class="line">    <span class="built_in">SET</span> PARAM=<span class="variable">%PARAM%</span> "%<span class="number">1</span>"</span><br><span class="line">    <span class="built_in">shift</span></span><br><span class="line">    <span class="keyword">GOTO</span> LOOP</span><br><span class="line">:END</span><br><span class="line">node_modules\.bin\gulp <span class="variable">%PARAM%</span></span><br></pre></td></tr></table></figure>
+<p>压缩 <code>public/</code> 下的静态页面</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gulp &lt;task&gt;</span><br></pre></td></tr></table></figure>
+<p>p.s. 之前一直用 Grunt 做压缩，花了较长时间学习，积累经验，但是感觉理解还是不够，这次折腾发现 gulp 更容易上手和使用，<code>gulpfile.js</code> 可读性很高，简直相见恨晚。</p>
+<h3 id="CDN-优化"><a href="#CDN-优化" class="headerlink" title="CDN 优化"></a>CDN 优化</h3><p>GitHub 提供的 web 服务是很好的，但是国内的网络环境使得访问 GitHub Pages 的速度惨不忍睹，提高访问速度的方法无外乎压缩源码、使用 CDN 等手段。上节试了压缩源码，但是性能提升十分有限。如果能把所需的所有 js/css/image 等文件以 CDN 方法部署，就能大大提高访问速度。hexo 目前还没有集成的方案，这方面还需要学习和研究，使用 CDN 优化网站访问速度。</p>
+<h3 id="SEO-优化"><a href="#SEO-优化" class="headerlink" title="SEO 优化"></a>SEO 优化</h3><p>GitHub Pages 在 SEO 方面先天不足，由于百度不对其做索引，导致网站流量仅能通过有限的渠道被访问，也导致搭在 GitHub 上的博客大都无人问津。应该从两方面来提高网站流量，最主要的是提高内容质量，再一方面做好 SEO 优化。hexo 可以就有 seo 插件，生成 sitemap。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-sitemap --save</span><br><span class="line">npm install hexo-generator-baidu-sitemap --save</span><br><span class="line">npm install hexo-generator-seo-friendly-sitemap --save</span><br></pre></td></tr></table></figure>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="http://www.jianshu.com/p/465830080ea9" target="_blank" rel="noopener">HEXO + Github,搭建属于自己的博客</a></li>
+<li><a href="http://x-web.github.io/2015/11/21/using-git-on-ubuntu14/" target="_blank" rel="noopener">在 Ubuntu 14 上使用 Git</a></li>
+<li><a href="http://forsigner.com/2016/03/10/fexo-doc-zh-cn/" target="_blank" rel="noopener">fexo-doc</a></li>
+<li><a href="http://www.tuicool.com/articles/rUrYfeB" target="_blank" rel="noopener">搭建 Hexo 博客–增强篇</a></li>
+<li><a href="https://yq.aliyun.com/articles/8608" target="_blank" rel="noopener">Hexo折腾记——性能优化篇</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wxpay.png" alt="萧暮Kyer WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="萧暮Kyer Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    萧暮Kyer
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://muxfe.github.io/2016/07/19/hexo-blog/" title="hexo + fexo 搭建 GitHub-Pages 静态博客">http://muxfe.github.io/2016/07/19/hexo-blog/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/web/" rel="tag"># web</a>
+          
+            <a href="/tags/hexo/" rel="tag"># hexo</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/13/spa-angularjs/" rel="next" title="Single Page Application - AngularJS">
+                <i class="fa fa-chevron-left"></i> Single Page Application - AngularJS
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/13/bmap-offline/" rel="prev" title="百度地图 Web 端离线方案">
+                百度地图 Web 端离线方案 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="萧暮Kyer" />
+          <p class="site-author-name" itemprop="name">萧暮Kyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/muxfe" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/b1ackdr3am" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                    
+                      Twitter
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/xw3b" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/muxfe/" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      豆瓣
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo-介绍"><span class="nav-number">1.</span> <span class="nav-text">hexo 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-Git-Bash"><span class="nav-number">2.1.</span> <span class="nav-text">安装 Git-Bash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-Node"><span class="nav-number">2.2.</span> <span class="nav-text">安装 Node</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-hexo"><span class="nav-number">2.3.</span> <span class="nav-text">安装 hexo</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试运行-hexo"><span class="nav-number">3.</span> <span class="nav-text">测试运行 hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置-hexo-运行脚本"><span class="nav-number">3.1.</span> <span class="nav-text">设置 hexo 运行脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#BAT"><span class="nav-number">3.1.1.</span> <span class="nav-text">BAT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BASH"><span class="nav-number">3.1.2.</span> <span class="nav-text">BASH</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化项目"><span class="nav-number">3.2.</span> <span class="nav-text">初始化项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成静态页面"><span class="nav-number">3.3.</span> <span class="nav-text">生成静态页面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-fexo-主题"><span class="nav-number">4.</span> <span class="nav-text">使用 fexo 主题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-fexo-主题"><span class="nav-number">4.1.</span> <span class="nav-text">安装 fexo 主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改配置文件"><span class="nav-number">4.2.</span> <span class="nav-text">修改配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装插件"><span class="nav-number">4.3.</span> <span class="nav-text">安装插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在-fexo-中自定义样式"><span class="nav-number">4.4.</span> <span class="nav-text">在 fexo 中自定义样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他不错的主题"><span class="nav-number">4.5.</span> <span class="nav-text">其他不错的主题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三方服务"><span class="nav-number">5.</span> <span class="nav-text">第三方服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用百度统计"><span class="nav-number">5.1.</span> <span class="nav-text">使用百度统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-Disqus-评论"><span class="nav-number">5.2.</span> <span class="nav-text">使用 Disqus 评论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-GitHub-Pages-部署网站"><span class="nav-number">6.</span> <span class="nav-text">使用 GitHub Pages 部署网站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能优化"><span class="nav-number">7.</span> <span class="nav-text">性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gulp-压缩"><span class="nav-number">7.1.</span> <span class="nav-text">gulp 压缩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CDN-优化"><span class="nav-number">7.2.</span> <span class="nav-text">CDN 优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SEO-优化"><span class="nav-number">7.3.</span> <span class="nav-text">SEO 优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">8.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-star"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">萧暮Kyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

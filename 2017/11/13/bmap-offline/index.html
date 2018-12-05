@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+      
+    
+    
+      
+    
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="前端,web,javascript," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="筑室因藏善本书" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="今年实验室几个 web 项目都用到了百度地图服务，但部署环境无法访问外网，必须要对百度地图进行离线化处理。百度地图没有官方的 web 端离线方案，只能自己动手，丰衣足食。地图离线化不仅包含普通地图的瓦片图，还要求包括卫星图 + 路网，绘制图形等独立的 Library。 看了一下百度地图 js 压缩处理后的源码，可以说是非常不友好了，为了快速实现这个需求，尽可能少的修改百度 js 代码，方便以后升级">
+<meta name="keywords" content="前端,web,javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="百度地图 Web 端离线方案">
+<meta property="og:url" content="http://muxfe.github.io/2017/11/13/bmap-offline/index.html">
+<meta property="og:site_name" content="筑室因藏善本书">
+<meta property="og:description" content="今年实验室几个 web 项目都用到了百度地图服务，但部署环境无法访问外网，必须要对百度地图进行离线化处理。百度地图没有官方的 web 端离线方案，只能自己动手，丰衣足食。地图离线化不仅包含普通地图的瓦片图，还要求包括卫星图 + 路网，绘制图形等独立的 Library。 看了一下百度地图 js 压缩处理后的源码，可以说是非常不友好了，为了快速实现这个需求，尽可能少的修改百度 js 代码，方便以后升级">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-05T02:13:26.651Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="百度地图 Web 端离线方案">
+<meta name="twitter:description" content="今年实验室几个 web 项目都用到了百度地图服务，但部署环境无法访问外网，必须要对百度地图进行离线化处理。百度地图没有官方的 web 端离线方案，只能自己动手，丰衣足食。地图离线化不仅包含普通地图的瓦片图，还要求包括卫星图 + 路网，绘制图形等独立的 Library。 看了一下百度地图 js 压缩处理后的源码，可以说是非常不友好了，为了快速实现这个需求，尽可能少的修改百度 js 代码，方便以后升级">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://muxfe.github.io/2017/11/13/bmap-offline/"/>
+
+
+
+
+
+  <title>百度地图 Web 端离线方案 | 筑室因藏善本书</title>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=63365746";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">筑室因藏善本书</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">随笔杂记</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://muxfe.github.io/2017/11/13/bmap-offline/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="萧暮Kyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="筑室因藏善本书">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">百度地图 Web 端离线方案</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-13T11:03:20+08:00">
+                2017-11-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">前端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>今年实验室几个 web 项目都用到了百度地图服务，但部署环境无法访问外网，必须要对百度地图进行离线化处理。百度地图没有官方的 web 端离线方案，只能自己动手，丰衣足食。地图离线化不仅包含普通地图的瓦片图，还要求包括卫星图 + 路网，绘制图形等独立的 Library。</p>
+<p>看了一下百度地图 js 压缩处理后的源码，可以说是非常不友好了，为了快速实现这个需求，尽可能少的修改百度 js 代码，方便以后升级或者禁用离线版，一个简单的思路是修改原始瓦片图请求为本地的离线地图库。</p>
+<a id="more"></a>
+<h2 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h2><p>电子地图主要是基于图层叠加进行绘制，从真实世界的物理建模到路网、建筑，再到服务标注。目前大多数互联网地图服务提供商都使用瓦片图的拼接来实现地理信息展示，每个缩放层级分辨率都不同，即不同的缩放层级，会把图层分成大小相同、数量不等的瓦片图。</p>
+<p>地理位置信息使用经纬度坐标来描述，原理是对椭球型的地球进行墨卡托投影，这种投影是将三维地球空间映射到二维空间，且能保持任意两点间的夹角不变。</p>
+<h3 id="经纬度坐标"><a href="#经纬度坐标" class="headerlink" title="经纬度坐标"></a>经纬度坐标</h3><p>国际标准的经纬度坐标是 <a href="http://gisgeography.com/wgs84-world-geodetic-system/" target="_blank" rel="noopener"><code>WGS84</code></a>，国内提供地理位置信息服务的公司使用的坐标体系都不尽相同。网上都存在不同坐标体系之间的相互转化，如 GoogleMap -&gt; BaiduMap 等。</p>
+<h2 id="核心库源码分析"><a href="#核心库源码分析" class="headerlink" title="核心库源码分析"></a>核心库源码分析</h2><p>Web 端百度地图的核心代码在 <code>BaiduApi_2.0.js</code> 中，主要实现了将 BMap 挂在 window 下，并添加一系列方法，和 AMD 模块加载。</p>
+<p>绘图的核心代码在 <code>DrawingManager_1.4.js</code>，主要实现了绘制多边形、区域选择等功能。</p>
+<h2 id="离线化"><a href="#离线化" class="headerlink" title="离线化"></a>离线化</h2><p>可选方案：</p>
+<ol>
+<li>leaflet + 百度/高德数据源</li>
+<li>浏览器缓存</li>
+<li>劫持请求到本地，缓存瓦片图【选用方案】</li>
+</ol>
+<p>其中 leaflet 方案需要较高的开发成本，而浏览器缓存在无网络的环境下又不可行，所以选用了劫持百度核心库请求的方案。</p>
+<h3 id="瓦片图离线化"><a href="#瓦片图离线化" class="headerlink" title="瓦片图离线化"></a>瓦片图离线化</h3><p><a href="https://github.com/muxfe/BaiduMap_tiles" target="_blank" rel="noopener">瓦片图下载</a>工具在 fork 仓库的基础上加了下载卫星图和多线程模式，修改了下载路径和文件名等，为了和劫持的请求进行适配。</p>
+<p>百度的瓦片图存储在多个 CDN 上，在核心代码里有一个简单的负载均衡策略，统一劫持改为离线模式。</p>
+<h3 id="百度地图模块离线化"><a href="#百度地图模块离线化" class="headerlink" title="百度地图模块离线化"></a>百度地图模块离线化</h3><p>百度地图除核心库外，还有很多以模块化加载的代码，放在 try-catch 里进行 eval。包括版本声明、InfoWidnow、Marker 等等。</p>
+<p>这部分直接下载相应模块代码保存在 getmodules。</p>
+<p>其中有一个点是百度设计的模块会并行加载，如有时候是 <code>mapclick,marker...</code> 加载，有时候是单个文件加载，而且顺序不定。这里我用了一个对象保存下载时的模块名称，然后进行匹配当时的模块请求，发现只要包括一项就加载多模块文件，缺少的再单独加载。</p>
+<h2 id="参考连接"><a href="#参考连接" class="headerlink" title="参考连接"></a>参考连接</h2><ul>
+<li><a href="https://www.wikiwand.com/zh-hans/%E5%9C%B0%E7%90%86%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F" target="_blank" rel="noopener">地理信息系统</a></li>
+<li><a href="http://cntchen.github.io/2016/05/09/%E5%9B%BD%E5%86%85%E4%B8%BB%E8%A6%81%E5%9C%B0%E5%9B%BE%E7%93%A6%E7%89%87%E5%9D%90%E6%A0%87%E7%B3%BB%E5%AE%9A%E4%B9%89%E5%8F%8A%E8%AE%A1%E7%AE%97%E5%8E%9F%E7%90%86/" target="_blank" rel="noopener">国内主要地图瓦片坐标系定义及计算原理</a></li>
+<li><a href="https://github.com/CntChen/tile-lnglat-transform" target="_blank" rel="noopener">高德、百度、谷歌和腾讯地图的经纬度坐标与瓦片坐标的相互转换</a></li>
+<li><a href="https://www.zhihu.com/question/21530085" target="_blank" rel="noopener">百度地图、高德地图的数据从哪里得到的？</a></li>
+<li><a href="http://api.map.baidu.com/lbsapi/getpoint/index.html" target="_blank" rel="noopener">百度地图拾取坐标系统</a></li>
+<li><a href="http://lbsyun.baidu.com/" target="_blank" rel="noopener">百度地图开放平台</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wxpay.png" alt="萧暮Kyer WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="萧暮Kyer Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    萧暮Kyer
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://muxfe.github.io/2017/11/13/bmap-offline/" title="百度地图 Web 端离线方案">http://muxfe.github.io/2017/11/13/bmap-offline/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+            <a href="/tags/web/" rel="tag"># web</a>
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/19/hexo-blog/" rel="next" title="hexo + fexo 搭建 GitHub-Pages 静态博客">
+                <i class="fa fa-chevron-left"></i> hexo + fexo 搭建 GitHub-Pages 静态博客
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/01/2017-review/" rel="prev" title="2017 年终总结">
+                2017 年终总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="萧暮Kyer" />
+          <p class="site-author-name" itemprop="name">萧暮Kyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/muxfe" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/b1ackdr3am" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                    
+                      Twitter
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/xw3b" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/muxfe/" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      豆瓣
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景知识"><span class="nav-number">1.</span> <span class="nav-text">背景知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#经纬度坐标"><span class="nav-number">1.1.</span> <span class="nav-text">经纬度坐标</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心库源码分析"><span class="nav-number">2.</span> <span class="nav-text">核心库源码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#离线化"><span class="nav-number">3.</span> <span class="nav-text">离线化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#瓦片图离线化"><span class="nav-number">3.1.</span> <span class="nav-text">瓦片图离线化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#百度地图模块离线化"><span class="nav-number">3.2.</span> <span class="nav-text">百度地图模块离线化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考连接"><span class="nav-number">4.</span> <span class="nav-text">参考连接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-star"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">萧暮Kyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+      
+    
+    
+      
+    
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="interview," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="筑室因藏善本书" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="百度前端面试（一面）尽管上周末百度的在线笔试非常不顺，这周一还是被通知第二天参加面试。面试直接安排在面试官所在的宾馆房间里，单独面试，由于只参加了一面，所以只能谈谈一面的感受。 百度是个比较崇尚技术的公司，一面全程都是技术基础知识和一个编程测试，没有问任何项目经验相关的东西，感觉有点像线下笔试了。 整个面试持续了一个小时。面试内容整理如下：">
+<meta name="keywords" content="interview">
+<meta property="og:type" content="article">
+<meta property="og:title" content="百度前端面试小记">
+<meta property="og:url" content="http://muxfe.github.io/2015/09/17/baidu-interview/index.html">
+<meta property="og:site_name" content="筑室因藏善本书">
+<meta property="og:description" content="百度前端面试（一面）尽管上周末百度的在线笔试非常不顺，这周一还是被通知第二天参加面试。面试直接安排在面试官所在的宾馆房间里，单独面试，由于只参加了一面，所以只能谈谈一面的感受。 百度是个比较崇尚技术的公司，一面全程都是技术基础知识和一个编程测试，没有问任何项目经验相关的东西，感觉有点像线下笔试了。 整个面试持续了一个小时。面试内容整理如下：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/12498412/9929637/a3beaee0-5d60-11e5-8f8b-3ad2a675778c.jpg">
+<meta property="og:updated_time" content="2018-09-27T09:01:19.210Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="百度前端面试小记">
+<meta name="twitter:description" content="百度前端面试（一面）尽管上周末百度的在线笔试非常不顺，这周一还是被通知第二天参加面试。面试直接安排在面试官所在的宾馆房间里，单独面试，由于只参加了一面，所以只能谈谈一面的感受。 百度是个比较崇尚技术的公司，一面全程都是技术基础知识和一个编程测试，没有问任何项目经验相关的东西，感觉有点像线下笔试了。 整个面试持续了一个小时。面试内容整理如下：">
+<meta name="twitter:image" content="https://cloud.githubusercontent.com/assets/12498412/9929637/a3beaee0-5d60-11e5-8f8b-3ad2a675778c.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://muxfe.github.io/2015/09/17/baidu-interview/"/>
+
+
+
+
+
+  <title>百度前端面试小记 | 筑室因藏善本书</title>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=63365746";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">筑室因藏善本书</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">随笔杂记</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://muxfe.github.io/2015/09/17/baidu-interview/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="萧暮Kyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="筑室因藏善本书">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">百度前端面试小记</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-17T10:03:20+08:00">
+                2015-09-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/随笔/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://cloud.githubusercontent.com/assets/12498412/9929637/a3beaee0-5d60-11e5-8f8b-3ad2a675778c.jpg" alt="web_interview"></p>
+<h1 id="百度前端面试（一面）"><a href="#百度前端面试（一面）" class="headerlink" title="百度前端面试（一面）"></a>百度前端面试（一面）</h1><p>尽管上周末百度的在线笔试非常不顺，这周一还是被通知第二天参加面试。面试直接安排在面试官所在的宾馆房间里，单独面试，由于只参加了一面，所以只能谈谈一面的感受。</p>
+<p>百度是个比较崇尚技术的公司，一面全程都是技术基础知识和一个编程测试，没有问任何项目经验相关的东西，感觉有点像线下笔试了。</p>
+<p>整个面试持续了一个小时。面试内容整理如下：</p>
+<a id="more"></a>
+<h2 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h2><p>必须的</p>
+<h1 id="HTML相关"><a href="#HTML相关" class="headerlink" title="HTML相关"></a>HTML相关</h1><h3 id="一些标签"><a href="#一些标签" class="headerlink" title="一些标签"></a>一些标签</h3><ul>
+<li>加粗</li>
+<li>上/下标</li>
+<li>pre</li>
+</ul>
+<h3 id="块级元素和行内元素举例及其区别"><a href="#块级元素和行内元素举例及其区别" class="headerlink" title="块级元素和行内元素举例及其区别"></a>块级元素和行内元素举例及其区别</h3><h3 id="DOCTYPE的作用"><a href="#DOCTYPE的作用" class="headerlink" title="DOCTYPE的作用"></a>DOCTYPE的作用</h3><h2 id="CSS布局相关"><a href="#CSS布局相关" class="headerlink" title="CSS布局相关"></a>CSS布局相关</h2><h3 id="元素居中的几种方法"><a href="#元素居中的几种方法" class="headerlink" title="元素居中的几种方法"></a>元素居中的几种方法</h3><h3 id="display分别可以取哪几个值及其相关含义"><a href="#display分别可以取哪几个值及其相关含义" class="headerlink" title="display分别可以取哪几个值及其相关含义"></a>display分别可以取哪几个值及其相关含义</h3><h3 id="bfc-block-formatting-context"><a href="#bfc-block-formatting-context" class="headerlink" title="bfc ( block formatting context )"></a>bfc ( block formatting context )</h3><h3 id="选择器优先级"><a href="#选择器优先级" class="headerlink" title="选择器优先级"></a>选择器优先级</h3><h3 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h3><h3 id="CSS预处理"><a href="#CSS预处理" class="headerlink" title="CSS预处理"></a>CSS预处理</h3><h2 id="JavaScript相关"><a href="#JavaScript相关" class="headerlink" title="JavaScript相关"></a>JavaScript相关</h2><h3 id="5个基本类型"><a href="#5个基本类型" class="headerlink" title="5个基本类型"></a>5个基本类型</h3><h3 id="原型链与继承"><a href="#原型链与继承" class="headerlink" title="原型链与继承"></a>原型链与继承</h3><h3 id="判断变量的类型"><a href="#判断变量的类型" class="headerlink" title="判断变量的类型"></a>判断变量的类型</h3><h3 id="setTimeout和setInterval"><a href="#setTimeout和setInterval" class="headerlink" title="setTimeout和setInterval"></a>setTimeout和setInterval</h3><h3 id="事件模型"><a href="#事件模型" class="headerlink" title="事件模型"></a>事件模型</h3><h3 id="ajax跨域"><a href="#ajax跨域" class="headerlink" title="ajax跨域"></a>ajax跨域</h3><h3 id="this指针和改变this指针的几种方法"><a href="#this指针和改变this指针的几种方法" class="headerlink" title="this指针和改变this指针的几种方法"></a>this指针和改变this指针的几种方法</h3><h3 id="一个编程题"><a href="#一个编程题" class="headerlink" title="一个编程题"></a>一个编程题</h3><p>写一个js函数，功能是将一段英文句子的所有单词首字母变成大写。</p>
+<h2 id="HTTP相关"><a href="#HTTP相关" class="headerlink" title="HTTP相关"></a>HTTP相关</h2><h3 id="基本方法"><a href="#基本方法" class="headerlink" title="基本方法"></a>基本方法</h3><h3 id="状态码及其含义"><a href="#状态码及其含义" class="headerlink" title="状态码及其含义"></a>状态码及其含义</h3><h2 id="js库"><a href="#js库" class="headerlink" title="js库"></a>js库</h2><h3 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a>jQuery</h3><h3 id="d3"><a href="#d3" class="headerlink" title="d3"></a>d3</h3><h3 id="svg和canvas"><a href="#svg和canvas" class="headerlink" title="svg和canvas"></a>svg和canvas</h3><h2 id="提问面试官"><a href="#提问面试官" class="headerlink" title="提问面试官"></a>提问面试官</h2><p>在前端如何选择技术方向深入学习</p>
+<p>答曰：项目实践</p>
+<h2 id="经验教训"><a href="#经验教训" class="headerlink" title="经验教训"></a>经验教训</h2><h3 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h3><p>要自信。</p>
+<h3 id="编程"><a href="#编程" class="headerlink" title="编程"></a>编程</h3><p>编程能力应该是面试官非常看重的一点，这方面我在js的算法上并不十分熟练，导致编程题答得一塌糊涂。非常遗憾。</p>
+<h3 id="沟通"><a href="#沟通" class="headerlink" title="沟通"></a>沟通</h3><p>每个问题应该仔细沟通然后理解，再作答。</p>
+<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><p>一定要扎实。</p>
+<p>一定要扎实。</p>
+<p>一定要扎实。</p>
+<p>（重要的话说三遍）</p>
+<h3 id="简历"><a href="#简历" class="headerlink" title="简历"></a>简历</h3><p>我的简历上并无十分突出的东西，但是简洁、一目了然。还写上了GitHub的地址，虽然发现自己在GitHub上很水，我想面试官应该看了，这是一把双刃剑啊。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>总体来说，我答得有些问题并不十分准备，甚至是错误的，反映出我在项目实践方面的欠缺和基本功的不扎实。在平时项目中，对于很多知识或者问题，仅仅通过百度/google出答案然后就不再深究，也没有积累，是非常不好的。</p>
+<p>相比今年7月份参加的阿里校招实习生的面试，我觉得自己已经进步了很多，从之前的方向不定和迷茫中渐渐找到了自己真正喜欢的东西。缺点是没有持续的学习和编码练习。</p>
+<p>以此自勉。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wxpay.png" alt="萧暮Kyer WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="萧暮Kyer Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    萧暮Kyer
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://muxfe.github.io/2015/09/17/baidu-interview/" title="百度前端面试小记">http://muxfe.github.io/2015/09/17/baidu-interview/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/interview/" rel="tag"># interview</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/11/21/using-git-on-ubuntu14/" rel="prev" title="在 Ubuntu 14 上使用 Git">
+                在 Ubuntu 14 上使用 Git <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="萧暮Kyer" />
+          <p class="site-author-name" itemprop="name">萧暮Kyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/muxfe" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/b1ackdr3am" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                    
+                      Twitter
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/xw3b" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/muxfe/" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      豆瓣
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#百度前端面试（一面）"><span class="nav-number">1.</span> <span class="nav-text">百度前端面试（一面）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#自我介绍"><span class="nav-number">1.1.</span> <span class="nav-text">自我介绍</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML相关"><span class="nav-number">2.</span> <span class="nav-text">HTML相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一些标签"><span class="nav-number">2.0.1.</span> <span class="nav-text">一些标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#块级元素和行内元素举例及其区别"><span class="nav-number">2.0.2.</span> <span class="nav-text">块级元素和行内元素举例及其区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOCTYPE的作用"><span class="nav-number">2.0.3.</span> <span class="nav-text">DOCTYPE的作用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS布局相关"><span class="nav-number">2.1.</span> <span class="nav-text">CSS布局相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#元素居中的几种方法"><span class="nav-number">2.1.1.</span> <span class="nav-text">元素居中的几种方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#display分别可以取哪几个值及其相关含义"><span class="nav-number">2.1.2.</span> <span class="nav-text">display分别可以取哪几个值及其相关含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bfc-block-formatting-context"><span class="nav-number">2.1.3.</span> <span class="nav-text">bfc ( block formatting context )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择器优先级"><span class="nav-number">2.1.4.</span> <span class="nav-text">选择器优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#盒模型"><span class="nav-number">2.1.5.</span> <span class="nav-text">盒模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS预处理"><span class="nav-number">2.1.6.</span> <span class="nav-text">CSS预处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript相关"><span class="nav-number">2.2.</span> <span class="nav-text">JavaScript相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5个基本类型"><span class="nav-number">2.2.1.</span> <span class="nav-text">5个基本类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原型链与继承"><span class="nav-number">2.2.2.</span> <span class="nav-text">原型链与继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#判断变量的类型"><span class="nav-number">2.2.3.</span> <span class="nav-text">判断变量的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setTimeout和setInterval"><span class="nav-number">2.2.4.</span> <span class="nav-text">setTimeout和setInterval</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件模型"><span class="nav-number">2.2.5.</span> <span class="nav-text">事件模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ajax跨域"><span class="nav-number">2.2.6.</span> <span class="nav-text">ajax跨域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#this指针和改变this指针的几种方法"><span class="nav-number">2.2.7.</span> <span class="nav-text">this指针和改变this指针的几种方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一个编程题"><span class="nav-number">2.2.8.</span> <span class="nav-text">一个编程题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP相关"><span class="nav-number">2.3.</span> <span class="nav-text">HTTP相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本方法"><span class="nav-number">2.3.1.</span> <span class="nav-text">基本方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态码及其含义"><span class="nav-number">2.3.2.</span> <span class="nav-text">状态码及其含义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#js库"><span class="nav-number">2.4.</span> <span class="nav-text">js库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jQuery"><span class="nav-number">2.4.1.</span> <span class="nav-text">jQuery</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d3"><span class="nav-number">2.4.2.</span> <span class="nav-text">d3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#svg和canvas"><span class="nav-number">2.4.3.</span> <span class="nav-text">svg和canvas</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提问面试官"><span class="nav-number">2.5.</span> <span class="nav-text">提问面试官</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#经验教训"><span class="nav-number">2.6.</span> <span class="nav-text">经验教训</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#状态"><span class="nav-number">2.6.1.</span> <span class="nav-text">状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编程"><span class="nav-number">2.6.2.</span> <span class="nav-text">编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#沟通"><span class="nav-number">2.6.3.</span> <span class="nav-text">沟通</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基础"><span class="nav-number">2.6.4.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简历"><span class="nav-number">2.6.5.</span> <span class="nav-text">简历</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">2.7.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-star"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">萧暮Kyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
